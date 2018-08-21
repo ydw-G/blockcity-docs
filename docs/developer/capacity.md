@@ -13,7 +13,7 @@ BlockPay支付
 开发者除了可以拿到布洛克用户唯一编号（uuid）进行免登处理，还能获取更多的信息，包括昵称，居民号、是否是创世居民、注册时间、是否通过二要素实名认证、是否通过KYC实名认证、布洛克城头像。
 此种场景，用户在操作过程中，会出现弹框界面（如下图）让用户确认是否授权。
 
-![img](/img/d-5-1.png)
+![img](/blockcity/img/d-5-1.png)
 
 #### 1.2 准入条件
 
@@ -31,13 +31,13 @@ BlockPay支付
 
 登录布洛克城开放平台，进入小应用列表，点击详情分别获取获取沙箱环境和正式环境的AppID和AppSecret。
 
-![img](/img/d-3-3.png)
+![img](/blockcity/img/d-3-3.png)
 
 #### 2.2 技术接入
 
 #### 2.2.1 Oauth2.0授权流程图
 
-![img](/img/d-5-2.png)
+![img](/blockcity/img/d-5-2.png)
 
 #### 2.2.2 主流程说明
 
@@ -110,19 +110,19 @@ BlockPay支付是一个基于布洛克城账户，资金，支付体系，支持
 
 步骤1：用户在小应用中选择商品下单、确认购买，进入支付环节，用户点击确认支付；
 
-![img](/img/d-5-3.png)   ![img](/img/d-5-4.png)
+![img](/blockcity/img/d-5-3.png)   ![img](/blockcity/img/d-5-4.png)
 
 步骤2：进入到布洛克城页面，调起BlockPay支付，出现确认支付界面；
 
-![img](/img/d-5-5.png)
+![img](/blockcity/img/d-5-5.png)
 
 步骤3：用户确认收款方和金额，点击立即支付后出现输入密码界面；
 
-![img](/img/d-5-6.png)   ![img](/img/d-5-7.png)
+![img](/blockcity/img/d-5-6.png)   ![img](/blockcity/img/d-5-7.png)
 
 步骤4：输入正确密码后，BlockPay端显示支付结果；
 
-![img](/img/d-5-8.png)
+![img](/blockcity/img/d-5-8.png)
 
 步骤5：自动回跳到小应用中。
 
@@ -142,13 +142,13 @@ BlockPay支付是一个基于布洛克城账户，资金，支付体系，支持
 
 登录布洛克城开放平台，进入小应用列表，点击详情分别获取获取沙箱环境和正式环境的AppID和AppSecret。
 
-![img](/img/d-3-3.png)
+![img](/blockcity/img/d-3-3.png)
 
 #### 2.1.2 上传应用公钥
 
 开发者需创建一对RSA公私钥，公钥上传给布洛克城开放平台，在小应用服务端用私钥加密签名生成sign，作为支付接口必要请求参数。
 
-![img](/img/d-3-5.png)
+![img](/blockcity/img/d-3-5.png)
 
 #### 2.1.3 引入Blockcity JS-SDK
 
@@ -168,7 +168,7 @@ import BlockCity from 'blockcity-js-sdk';
 
 #### BlockPay支付调用流程图
 
-![img](/img/d-5-9.jpg)
+![img](/blockcity/img/d-5-9.jpg)
 
 #### 主要步骤
 
