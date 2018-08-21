@@ -15,6 +15,7 @@ module.exports = {
     },
     themeConfig: {
         repo: 'https://github.com/gxchain/blockcity-docs',
+        docsDir: 'docs',
         editLinks: true,
         sidebarDepth: 3,
         theme: 'vue',
