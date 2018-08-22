@@ -228,13 +228,13 @@ BlockCity.choosePay({
 
 | 接口名称 | 描述 |
 | :--- | :--- |
-| [预创建支付API](api.html#blockpay-trade-app-pay（预创建支付api）) | 预先创建支付订单接口 |
-| [查询交易API](api.html#blockpay-trade-detail（查询交易api）) | 交易状态主动查询接口 |
-| [退款接口API](api.html#blockpay-trade-refund（退款接口api）) | 发起交易退款接口 |
-| [查询退款API](api.html#blockpay-trade-refund-query（查询退款api）) | 交易退款状态查询接口 |
-| [关闭交易API](api.html#blockpay-trade-close（关闭交易api）) | 关闭指定的支付订单接口 |
-| [支持支付币种API](api.html#blockpay-currency-list（支持支付币种api）) | 拉取支持的所有支付币种接口 |
-| [转账API](api.html#blockpay-trade-transfer（转账api）) | 商户对用户进行直接转账的接口 |
+| [预创建支付API](api.html#预创建支付) | 预先创建支付订单接口 |
+| [查询交易API](api.html#查询交易) | 交易状态主动查询接口 |
+| [退款接口API](api.html#退款接口) | 发起交易退款接口 |
+| [查询退款API](api.html#查询退款) | 交易退款状态查询接口 |
+| [关闭交易API](api.html#关闭交易) | 关闭指定的支付订单接口 |
+| [支持支付币种API](api.html#支持支付币种) | 拉取支持的所有支付币种接口 |
+| [转账API](api.html#转账ap) | 商户对用户进行直接转账的接口 |
 
 #### 补充说明
 
