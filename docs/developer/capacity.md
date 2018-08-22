@@ -205,14 +205,55 @@ BlockCity.choosePay({
 
 用户支付成功后，小应用服务端会收到来自布洛克城的支付结果回调，回调地址为调用[预创建支付接口](api.html#blockpay-trade-app-pay（预创建支付api）) 时，指定的notify\_url，回调接口请求方式为 JSON POST BODY。
 
+* 返回参数：
+
+| 参数 | 类型 | 是否必须 | 描述 |
+| :--- | :--- | :--- | :--- |
+| appId | string | 是 | 应用id |
+| tradeNo | string | 是 | 支付订单号 | 
+| outTradeNo | string | 是 | 商户唯一订单号 | 
+| paySuccess | boolean | 是 | 是否支付成功 | 
+| callbackParams | string | 否 | 预创建时商户传入的参数 | 
+| sign | string | 是 | 回调签名，签名方式：RSA("appId=&outTradeNo=&paySuccess=&tradeNo=","公钥") | 
+
+* 校验签名示例
+
+```java
+        PayCallBackParam param = new PayCallBackParam();
+        param.setAppId("appId");
+        param.setOutTradeNo("outTradeNo");
+        param.setPaySuccess(true);
+        param.setTradeNo("tradeNo");
+        param.setSign("回调签名");
+        //组装签名体
+        StringBuilder builder = new StringBuilder();
+        builder.append("appId=").append(param.getAppId())
+                .append("&outTradeNo=").append(param.getOutTradeNo())
+                .append("&paySuccess=").append(param.isPaySuccess())
+                .append("&tradeNo=").append(param.getTradeNo());
+        if(RsaSignature.rsaDecrypt(builder.toString(),"私钥").equals(param.getSign())){
+            //签名通过
+        }
+```
+
+* 代码下载
+
+[JAVA代码示例下载](http://gxb-doc.oss-cn-hangzhou.aliyuncs.com/blockpay/paydemo.zip)
+
+* 验证数据的正确性
+
+在签名校验成功后，请严格校验：1.appId是否为改商户本身，2.outTradeNo为商户系统中创建的订单号，3.tradeNo能与outTradeNo对应。上述有任何一个验证不通过，则表明本次通知是异常通知
+
 * 回调JSON请求示例：
 
 ```
 {
+    "appId":"应用id"
     "tradeNo": "支付订单号"
     "outTradeNo":"商户唯一订单号",
     "paySuccess":true,
-    "callbackParams":"根据预创建时传入的值一模一样返回"
+    "callbackParams":"根据预创建时传入的值一模一样返回",
+    "sign":"返回签名"
 }
 ```
 
@@ -228,13 +269,13 @@ BlockCity.choosePay({
 
 | 接口名称 | 描述 |
 | :--- | :--- |
-| [预创建支付API](api.html#blockpay-trade-app-pay（预创建支付api）) | 预先创建支付订单接口 |
-| [查询交易API](api.html#blockpay-trade-detail（查询交易api）) | 交易状态主动查询接口 |
-| [退款接口API](api.html#blockpay-trade-refund（退款接口api）) | 发起交易退款接口 |
-| [查询退款API](api.html#blockpay-trade-refund-query（查询退款api）) | 交易退款状态查询接口 |
-| [关闭交易API](api.html#blockpay-trade-close（关闭交易api）) | 关闭指定的支付订单接口 |
-| [支持支付币种API](api.html#blockpay-currency-list（支持支付币种api）) | 拉取支持的所有支付币种接口 |
-| [转账API](api.html#blockpay-trade-transfer（转账api）) | 商户对用户进行直接转账的接口 |
+| [预创建支付API](api.html#预创建支付) | 预先创建支付订单接口 |
+| [查询交易API](api.html#查询交易) | 交易状态主动查询接口 |
+| [退款接口API](api.html#退款接口) | 发起交易退款接口 |
+| [查询退款API](api.html#查询退款) | 交易退款状态查询接口 |
+| [关闭交易API](api.html#关闭交易) | 关闭指定的支付订单接口 |
+| [支持支付币种API](api.html#支持支付币种) | 拉取支持的所有支付币种接口 |
+| [转账API](api.html#转账ap) | 商户对用户进行直接转账的接口 |
 
 #### 补充说明
 
@@ -326,7 +367,7 @@ BlockCity.qrScan(function (result) {
 
 ### 功能介绍
 
-为开发者提供自定义内容分析的能力。
+为开发者提供自定义内容分享的能力。
 
 #### 1.1 功能流程
 

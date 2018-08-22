@@ -19,6 +19,10 @@ module.exports = {
         editLinks: true,
         sidebarDepth: 3,
         theme: 'vue',
+        algolia: {
+            apiKey: '2fee0b32ca89ecec664388d4397f68ad',
+            indexName: 'blockcity'
+        },
         locales: {
             '/': {
                 label: '简体中文',
