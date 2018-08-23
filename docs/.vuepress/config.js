@@ -121,7 +121,8 @@ function genSidebarConfig(title, link) {
                         'prepare',
                         'release',
                         'capacity',
-                        'api'
+                        'api',
+                        'qa'
                     ]
                 }
             ]

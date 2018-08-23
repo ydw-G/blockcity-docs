@@ -82,7 +82,7 @@ public static String signRequest(Map<String, String> params) throws IOException 
 
 为了防止API调用过程中被黑客恶意篡改，调用任何一个API都需要携带签名，服务端会根据请求参数，对签名进行验证，签名不合法的请求将会被拒绝。
 
-开发者需提供一对RSA公私钥，公钥上传给布洛克城，在小应用服务端用私钥加密签名串，传在sign字段里
+开发者需提供一对RSA(2048位)公私钥，公钥上传给布洛克城，在小应用服务端用私钥加密签名串，传在sign字段里。公私钥可以通过[在线生成工具](http://tools.jb51.net/password/rsa_encode)生成，密钥位数请选择2048位。
 
 加密内容 ： rsa\(biz\_content+timestamp\)
 
@@ -124,11 +124,11 @@ System.out.println(JSON.toJSONString(param));
 
 #### 公共请求参数
 
-| 字段 | 是否必选 | 描述 |
-| :--- | :--- | :--- |
-| client\_id | 是 | 等同于appid，创建应用时获得 |
-| client\_secret | 是 | appid对应的密钥，即app\_secret |
-| code | 是 | 用户授权后生成的授权code |
+| 字段 | 是否必选 | 最大长度 | 描述 |
+| :--- | :--- | :--- | :--- |
+| client\_id | 是 | 16 | 等同于appid，创建应用时获得 |
+| client\_secret | 是 | 32 | appid对应的密钥，即app\_secret |
+| code | 是 | 16 | 用户授权后生成的授权code |
 
 #### 公共响应参数
 
@@ -139,11 +139,11 @@ System.out.println(JSON.toJSONString(param));
 
 #### 响应参数
 
-| 参数名称 | 参数类型 | 参数描述 |
-| :--- | :--- | :--- |
-| access\_token | string | 访问令牌 |
-| refresh\_token | string | 刷新令牌 |
-| expires\_date | long | 令牌有效期 |
+| 参数名称 | 参数类型 | 最大长度 | 参数描述 |
+| :--- | :--- | :--- | :--- |
+| access\_token | string | 32 | 访问令牌 |
+| refresh\_token | string | 32 | 刷新令牌 |
+| expires\_date | long | - | 令牌有效期 |
 
 #### 请求示例
 
@@ -179,11 +179,11 @@ System.out.println(JSON.toJSONString(param));
 
 #### 公共请求参数
 
-| 字段 | 是否必选 | 描述 |
-| :--- | :--- | :--- |
-| client\_id | 是 | 等同于appid，创建应用时获得 |
-| client\_secret | 是 | appid对应的密钥，即app\_secret |
-| refresh\_token | 是 | 刷新令牌 |
+| 字段 | 是否必选 | 最大长度 | 描述 |
+| :--- | :--- | :--- | :--- |
+| client\_id | 是 | 16 | 等同于appid，创建应用时获得 |
+| client\_secret | 是 | 32 | appid对应的密钥，即app\_secret |
+| refresh\_token | 是 | 32 | 刷新令牌 |
 
 #### 公共响应参数
 
@@ -194,9 +194,9 @@ System.out.println(JSON.toJSONString(param));
 
 #### 响应参数
 
-| 参数名称 | 参数类型 | 参数描述 |
-| :--- | :--- | :--- |
-| expires\_date | long | 令牌有效期 |
+| 参数名称 | 参数类型 | 最大长度 | 参数描述 |
+| :--- | :--- | :--- | :--- |
+| expires\_date | long | - | 令牌有效期 |
 
 #### 请求示例
 
@@ -232,13 +232,13 @@ System.out.println(JSON.toJSONString(param));
 
 #### 公共请求参数
 
-| 参数名称 | 参数类型 | 是否必须 | 参数描述 |
-| :--- | :--- | :--- | :--- |
-| client\_id | string | 是 | appId |
-| method | string | 是 | 调用的接口，user.baseinfo |
-| access\_token | string | 是 | 用户访问令牌 |
-| timestamp | string | 是 | 时间戳，与服务器时间相差在5分钟以内才有效 |
-| sign | string | 是 | 接口签名，[令牌签名算法](api.html#令牌签名) |
+| 参数名称 | 参数类型 | 是否必须 | 最大长度 | 参数描述 |
+| :--- | :--- | :--- | :--- | :--- |
+| client\_id | string | 是 | 16 | appId |
+| method | string | 是 | - | 调用的接口，user.baseinfo |
+| access\_token | string | 是 | 32 | 用户访问令牌 |
+| timestamp | string | 是 | - | 时间戳，与服务器时间相差在5分钟以内才有效 |
+| sign | string | 是 | - | 接口签名，[令牌签名算法](api.html#令牌签名) |
 
 #### 公共响应参数
 
@@ -250,16 +250,16 @@ System.out.println(JSON.toJSONString(param));
 
 #### 响应参数
 
-| 参数名称 | 参数类型 | 参数描述 |
-| :--- | :--- | :--- |
-| uuid | string | G-ID |
-| nickName | string | 昵称 |
-| memberNumber | int | 居民号 |
-| founder | int | 是否创始居民，1是0否 |
-| registerDate | long | 注册时间 |
-| isKyc | boolean | 是否人脸识别kyc |
-| isTwoElement | boolean | 是否实名 |
-| heads | string | 头像 |
+| 参数名称 | 参数类型 | 最大长度 | 参数描述 |
+| :--- | :--- | :--- | :--- |
+| uuid | string | 32 | G-ID |
+| nickName | string | 64 | 昵称 |
+| memberNumber | int | - | 居民号 |
+| founder | int | - | 是否创始居民，1是0否 |
+| registerDate | long | - | 注册时间 |
+| isKyc | boolean | - | 是否人脸识别kyc |
+| isTwoElement | boolean | - | 是否实名 |
+| heads | string | 512 | 头像 |
 
 #### 请求示例
 
@@ -329,27 +329,27 @@ System.out.println(JSON.toJSONString(param));
 
 #### 公共请求参数
 
-| 参数名称 | 参数类型 | 是否必须 | 参数描述 |
-| :--- | :--- | :--- | :--- |
-| app\_id | string | 是 | 商户的appid |
-| method | string | 是 | 调用的接口，blockpay.trade.app.pay |
-| timestamp | long | 是 | 调用时间戳 |
-| version | string | 是 | 调用的接口版本，固定为：1.0 |
-| notify\_url | string | 否 | 支付回调地址 |
-| biz\_content | string | 是 | 业务请求参数的集合 ，json格式 |
-| sign | string | 是 | 接口签名，[签名算法](#支付签名) |
+| 参数名称 | 参数类型 | 是否必须 | 最大长度 | 参数描述 |
+| :--- | :--- | :--- | :--- | :--- |
+| app\_id | string | 是 | 16 | 商户的appid |
+| method | string | 是 | - | 调用的接口，blockpay.trade.app.pay |
+| timestamp | long | 是 | - | 调用时间戳 |
+| version | string | 是 | - | 调用的接口版本，固定为：1.0 |
+| notify\_url | string | 否 | 256 | 支付回调地址 |
+| biz\_content | string | 是 | - | 业务请求参数的集合 ，json格式 |
+| sign | string | 是 | - | 接口签名，[签名算法](#支付签名) |
 
 #### 请求参数
 
-| 参数 | 类型 | 是否必须 | 描述 |
-| :--- | :--- | :--- | :--- |
-| subject | string | 是 | 商品的标题 |
-| out\_trade\_no | string | 是 | 商户唯一订单号 |
-| pay\_expire | string | 否 | 该笔订单允许的最晚付款时间，逾期将关闭交易，默认30m。取值范围：1m～1d，m-分钟，h-小时，d-天 |
-| total\_amount | double | 是 | 订单总金额，单位为元，精确到小数点后五位，取值范围\[0.00001,100000000\] |
-| seller\_id | string | 否 | 收款方的用户uuid，不传代表应用对应商户 |
-| currency | string | 是 | 支付币种，例：GXS |
-| callback\_params | string | 否 | 支付回调时传的参数 |
+| 参数 | 类型 | 是否必须 | 最大长度 | 描述 |
+| :--- | :--- | :--- | :--- | :--- |
+| subject | string | 是 | 256 | 商品的标题 |
+| out\_trade\_no | string | 是 | 32 | 商户唯一订单号 |
+| pay\_expire | string | 否 | - | 该笔订单允许的最晚付款时间，逾期将关闭交易，默认30m。取值范围：1m～1d，m-分钟，h-小时，d-天 |
+| total\_amount | double | 是 | - | 订单总金额，单位为元，精确到小数点后五位，取值范围\[0.00001,100000000\] |
+| seller\_id | string | 否 | 32 | 收款方的用户uuid，不传代表应用对应商户 |
+| currency | string | 是 | 32 | 支付币种，例：GXS |
+| callback\_params | string | 否 | 512 | 支付回调时传的参数 |
 
 #### 公共响应参数
 
@@ -374,12 +374,12 @@ System.out.println(JSON.toJSONString(param));
 
 #### 响应参数
 
-| 参数 | 类型 | 是否必须 | 描述 |
-| :--- | :--- | :--- | :--- |
-| out\_trade\_no | string | 是 | 商户网站唯一订单号 |
-| trade\_no | string | 是 | 交易流水号 |
-| total\_amount | double | 是 | 该笔订单的资金总额 |
-| currency | string | 是 | 支付币种，GXS |
+| 参数 | 类型 | 是否必须 | 最大长度 | 描述 |
+| :--- | :--- | :--- | :--- | :--- |
+| out\_trade\_no | string | 是 | 32 | 商户网站唯一订单号 |
+| trade\_no | string | 是 | 32 | 交易流水号 |
+| total\_amount | double | 是 | - | 该笔订单的资金总额 |
+| currency | string | 是 | 32 | 支付币种，GXS |
 
 #### 请求示例
 
@@ -428,26 +428,26 @@ System.out.println(JSON.toJSONString(param));
 
 #### 公共请求参数
 
-| 参数名称 | 参数类型 | 是否必须 | 参数描述 |
-| :--- | :--- | :--- | :--- |
-| app\_id | string | 是 | 商户的appid |
-| method | string | 是 | 调用的接口，blockpay.trade.transfer |
-| timestamp | long | 是 | 调用时间戳 |
-| version | string | 是 | 调用的接口版本，固定为：1.0 |
-| notify\_url | string | 否 | 支付回调地址 |
-| biz\_content | string | 是 | 业务请求参数的集合 ，json格式 |
-| sign | string | 是 | 接口签名，[签名算法](#支付签名) ||
+| 参数名称 | 参数类型 | 是否必须 | 最大长度 | 参数描述 |
+| :--- | :--- | :--- | :--- | :--- |
+| app\_id | string | 是 | 16 | 商户的appid |
+| method | string | 是 | - | 调用的接口，blockpay.trade.transfer |
+| timestamp | long | 是 | - | 调用时间戳 |
+| version | string | 是 | - | 调用的接口版本，固定为：1.0 |
+| notify\_url | string | 否 | 256 | 支付回调地址 |
+| biz\_content | string | 是 | - | 业务请求参数的集合 ，json格式 |
+| sign | string | 是 | - | 接口签名，[签名算法](#支付签名) ||
 
 #### 请求参数
 
-| 参数 | 类型 | 是否必须 | 描述 |
-| :--- | :--- | :--- | :--- |
-| to\_user | string | 是 | 转入方的用户id，可根据交易详情查询buyer\_id，也可通过auth的/user/baseinfo接口获取用户的uuid |
-| amount | double | 是 | 转账金额 |
-| currency | string | 是 | 币种 |
-| remark | string | 否 | 备注 |
-| pswd | string | 是 | 交易密码，加密方式，md5\(md5\(密码\)+timestamp\) |
-| outTransferNo | string | 是 | 商户外部转账no，请传唯一id，一个外部转账no只能转账一次 |
+| 参数 | 类型 | 是否必须 | 最大长度 | 描述 |
+| :--- | :--- | :--- | :---| :--- |
+| to\_user | string | 是 | 32 | 转入方的用户id，可根据交易详情查询buyer\_id，也可通过auth的/user/baseinfo接口获取用户的uuid |
+| amount | double | 是 | - | 转账金额 |
+| currency | string | 是 | 32 | 币种 |
+| remark | string | 否 | 256 | 备注 |
+| pswd | string | 是 | - | 商户绑定布洛克城账号的交易密码，，加密方式，md5\(md5\(密码\)+timestamp\) |
+| outTransferNo | string | 是 | 32 | 商户外部转账no，请传唯一id，一个外部转账no只能转账一次 |
 
 #### 公共响应参数
 
@@ -472,9 +472,9 @@ System.out.println(JSON.toJSONString(param));
 
 #### 响应参数
 
-| 参数 | 类型 | 是否必须 | 描述 |
-| :--- | :--- | :--- | :--- |
-| transfer\_no | string | 是 | 转账订单号 |
+| 参数 | 类型 | 是否必须 | 最大长度 | 描述 |
+| :--- | :--- | :--- | :---| :--- |
+| transfer\_no | string | 是 | 32 | 转账订单号 |
 
 #### 请求示例
 
@@ -518,22 +518,22 @@ System.out.println(JSON.toJSONString(param));
 
 #### 公共请求参数
 
-| 参数名称 | 参数类型 | 是否必须 | 参数描述 |
-| :--- | :--- | :--- | :--- |
-| app\_id | string | 是 | 商户的appid |
-| method | string | 是 | 调用的接口，blockpay.trade.detail |
-| timestamp | long | 是 | 调用时间戳 |
-| version | string | 是 | 调用的接口版本，固定为：1.0 |
-| notify\_url | string | 否 | 支付回调地址 |
-| biz\_content | string | 是 | 业务请求参数的集合 ，json格式 |
-| sign | string | 是 | 接口签名，[签名算法](#支付签名) |
+| 参数名称 | 参数类型 | 是否必须 | 最大长度 | 参数描述 |
+| :--- | :--- | :--- | :---| :--- |
+| app\_id | string | 是 | 16 | 商户的appid |
+| method | string | 是 | - | 调用的接口，blockpay.trade.detail |
+| timestamp | long | 是 | - | 调用时间戳 |
+| version | string | 是 | - | 调用的接口版本，固定为：1.0 |
+| notify\_url | string | 否 | 256 | 支付回调地址 |
+| biz\_content | string | 是 | - | 业务请求参数的集合 ，json格式 |
+| sign | string | 是 | - | 接口签名，[签名算法](#支付签名) |
 
 #### 请求参数
 
-| 参数 | 类型 | 是否必须 | 描述 |
-| :--- | :--- | :--- | :--- |
-| out\_trade\_no | string | 可选 | 订单支付时传入的商户订单号,和交易号不能同时为空 |
-| trade\_no | string | 可选 | 交易流水号 |
+| 参数 | 类型 | 是否必须 | 最大长度 | 描述 |
+| :--- | :--- | :--- | :---| :--- |
+| out\_trade\_no | string | 可选 | 32 | 订单支付时传入的商户订单号,和交易号不能同时为空 |
+| trade\_no | string | 可选 | 32 | 交易流水号 |
 
 #### 公共响应参数
 
@@ -558,19 +558,19 @@ System.out.println(JSON.toJSONString(param));
 
 #### 响应参数
 
-| 参数 | 类型 | 是否必须 | 描述 |
-| :--- | :--- | :--- | :--- |
-| trade\_no | string | 是 | 平台交易号 |
-| out\_trade\_no | string | 是 | 商家订单号 |
-| trade\_status | string | 是 | 支付状态WAIT\_BUYER\_PAY（交易创建，等待买家付款）、PAY\_SUCCESS\(支付成功,可退款\)TRADE\_CLOSED（未付款交易超时关闭）、TRADE\_FINISHED（交易成功，不可退款） |
-| total\_amount | double | 是 | 总金额 |
-| currency | string | 是 | 币种 |
-| pay\_amount | double | 否 | 实际支付金额 |
-| subject | string | 是 | 商品标题 |
-| create\_time | date | 是 | 创建时间 |
-| pay\_time | date | 否 | 支付时间 |
-| seller\_id | string | 是 | 卖家id |
-| buyer\_id | string | 否 | 买家id |
+| 参数 | 类型 | 是否必须 | 最大长度 | 描述 |
+| :--- | :--- | :--- | :--- | :--- |
+| trade\_no | string | 是 | 32 | 平台交易号 |
+| out\_trade\_no | string | 是 | 32 | 商家订单号 |
+| trade\_status | string | 是 | 64 | 支付状态WAIT\_BUYER\_PAY（交易创建，等待买家付款）、PAY\_SUCCESS\(支付成功,可退款\)TRADE\_CLOSED（未付款交易超时关闭）、TRADE\_FINISHED（交易成功，不可退款） |
+| total\_amount | double | 是 | - | 总金额 |
+| currency | string | 是 | 32 | 币种 |
+| pay\_amount | double | 否 | - | 实际支付金额 |
+| subject | string | 是 | 256 | 商品标题 |
+| create\_time | date | 是 | - | 创建时间 |
+| pay\_time | date | 否 | - | 支付时间 |
+| seller\_id | string | 是 | 32 | 卖家uuid |
+| buyer\_id | string | 否 | 32 | 买家uuid |
 
 #### 请求示例
 
@@ -624,24 +624,24 @@ System.out.println(JSON.toJSONString(param));
 
 #### 公共请求参数
 
-| 参数名称 | 参数类型 | 是否必须 | 参数描述 |
-| :--- | :--- | :--- | :--- |
-| app\_id | string | 是 | 商户的appid |
-| method | string | 是 | 调用的接口，blockpay.trade.refund |
-| timestamp | long | 是 | 调用时间戳 |
-| version | string | 是 | 调用的接口版本，固定为：1.0 |
-| notify\_url | string | 否 | 支付回调地址
-| biz\_content | string | 是 | 业务请求参数的集合 ，json格式 |
-| sign | string | 是 | 接口签名，[签名算法](#支付签名) |
+| 参数名称 | 参数类型 | 是否必须 | 最大长度 | 参数描述 |
+| :--- | :--- | :--- | :---| :--- |
+| app\_id | string | 是 | 16 | 商户的appid |
+| method | string | 是 | - | 调用的接口，blockpay.trade.refund |
+| timestamp | long | 是 | - | 调用时间戳 |
+| version | string | 是 | - | 调用的接口版本，固定为：1.0 |
+| notify\_url | string | 否 | 256 | 支付回调地址
+| biz\_content | string | 是 | - | 业务请求参数的集合 ，json格式 |
+| sign | string | 是 | - | 接口签名，[签名算法](#支付签名) |
 
 #### 请求参数
 
-| 参数 | 类型 | 是否必须 | 描述 |
-| :--- | :--- | :--- | :--- |
-| out\_trade\_no | string | 可选 | 订单支付时传入的商户订单号,和交易号不能同时为空 |
-| trade\_no | string | 可选 | 交易流水号 |
-| refund\_reason | string | 否 | 退款说明 |
-| refund\_amount | double | 是 | 退款金额，不能大于支付金额 |
+| 参数 | 类型 | 是否必须 | 最大长度 | 描述 |
+| :--- | :--- | :--- | :---| :--- |
+| out\_trade\_no | string | 可选 | 32 | 订单支付时传入的商户订单号,和交易号不能同时为空 |
+| trade\_no | string | 可选 | 32 | 交易流水号 |
+| refund\_reason | string | 否 | 256 | 退款说明 |
+| refund\_amount | double | 是 | - | 退款金额，不能大于支付金额 |
 
 #### 公共响应参数
 
@@ -666,9 +666,9 @@ System.out.println(JSON.toJSONString(param));
 
 #### 响应参数
 
-| 参数 | 类型 | 是否必须 | 描述 |
-| :--- | :--- | :--- | :--- |
-| refund\_no | string | 是 | 退款流水号 |
+| 参数 | 类型 | 是否必须 | 最大长度 | 描述 |
+| :--- | :--- | :--- | :---| :--- |
+| refund\_no | string | 是 | 32 | 退款流水号 |
 
 #### 请求示例
 
@@ -712,21 +712,21 @@ System.out.println(JSON.toJSONString(param));
 
 #### 公共请求参数
 
-| 参数名称 | 参数类型 | 是否必须 | 参数描述 |
-| :--- | :--- | :--- | :--- |
-| app\_id | string | 是 | 商户的appid |
-| method | string | 是 | 调用的接口，blockpay.trade.refund.query |
-| timestamp | long | 是 | 调用时间戳 |
-| version | string | 是 | 调用的接口版本，固定为：1.0 |
-| notify\_url | string | 否 | 支付回调地址
-| biz\_content | string | 是 | 业务请求参数的集合 ，json格式 |
-| sign | string | 是 | 接口签名，[签名算法](#支付签名) |
+| 参数名称 | 参数类型 | 是否必须 | 最大长度 | 参数描述 |
+| :--- | :--- | :--- | :---| :--- |
+| app\_id | string | 是 | 16 | 商户的appid |
+| method | string | 是 | - | 调用的接口，blockpay.trade.refund.query |
+| timestamp | long | 是 | - | 调用时间戳 |
+| version | string | 是 | - | 调用的接口版本，固定为：1.0 |
+| notify\_url | string | 否 | 256 | 支付回调地址
+| biz\_content | string | 是 | - | 业务请求参数的集合 ，json格式 |
+| sign | string | 是 | - | 接口签名，[签名算法](#支付签名) |
 
 #### 请求参数
 
-| 参数 | 类型 | 是否必须 | 描述 |
-| :--- | :--- | :--- | :--- |
-| refund\_no | string | 是 | 退款流水号 |
+| 参数 | 类型 | 是否必须 | 最大长度 | 描述 |
+| :--- | :--- | :--- | :---| :--- |
+| refund\_no | string | 是 | 32 | 退款流水号 |
 
 #### 公共响应参数
 
@@ -751,16 +751,16 @@ System.out.println(JSON.toJSONString(param));
 
 #### 响应参数
 
-| 参数 | 类型 | 是否必须 | 描述 |
-| :--- | :--- | :--- | :--- |
-| refund\_no | string | 是 | 退款流水号 |
-| trade\_no | string | 是 | 平台交易号 |
-| out\_trade\_no | string | 是 | 商家订单号 |
-| seller\_id | string | 是 | 卖家id |
-| buyer\_id | string | 否 | 买家id |
-| refund\_amount | double | 是 | 退款金额 |
-| refund\_reason | string | 否 | 退款说明 |
-| refund\_date | date | 是 | 退款时间 |
+| 参数 | 类型 | 是否必须 | 最大长度 | 描述 |
+| :--- | :--- | :--- | :--- | :--- |
+| refund\_no | string | 是 | 32 | 退款流水号 |
+| trade\_no | string | 是 | 32 | 平台交易号 |
+| out\_trade\_no | string | 是 | 32 | 商家订单号 |
+| seller\_id | string | 是 | 32 | 卖家uuid |
+| buyer\_id | string | 否 | 32 | 买家uuid |
+| refund\_amount | double | 是 | - | 退款金额 |
+| refund\_reason | string | 否 | 256 | 退款说明 |
+| refund\_date | date | 是 | - | 退款时间 |
 
 #### 请求示例
 
@@ -812,19 +812,19 @@ System.out.println(JSON.toJSONString(param));
 
 #### 公共请求参数
 
-| 参数名称 | 参数类型 | 是否必须 | 参数描述 |
-| :--- | :--- | :--- | :--- |
-| app\_id | string | 是 | 商户的appid |
-| method | string | 是 | 调用的接口，blockpay.trade.close |
-| timestamp | long | 是 | 调用时间戳 |
-| version | string | 是 | 调用的接口版本，固定为：1.0 |
-| notify\_url | string | 否 | 支付回调地址
-| biz\_content | string | 是 | 业务请求参数的集合 ，json格式 |
-| sign | string | 是 | 接口签名，[签名算法](#支付签名) |
+| 参数名称 | 参数类型 | 是否必须 | 最大长度 | 参数描述 |
+| :--- | :--- | :--- | :--- | :--- |
+| app\_id | string | 是 | 16 | 商户的appid |
+| method | string | 是 | - | 调用的接口，blockpay.trade.close |
+| timestamp | long | 是 | - | 调用时间戳 |
+| version | string | 是 | - | 调用的接口版本，固定为：1.0 |
+| notify\_url | string | 否 | 256 | 支付回调地址
+| biz\_content | string | 是 | - | 业务请求参数的集合 ，json格式 |
+| sign | string | 是 | - | 接口签名，[签名算法](#支付签名) |
 
 #### 请求参数
 
-| 参数 | 类型 | 是否必须 | 描述 |
+| 参数 | 类型 | 是否必须 | 最大长度 | 描述 |
 | :--- | :--- | :--- | :--- |
 | out\_trade\_no | string | 可选 | 订单支付时传入的商户订单号,和交易号不能同时为空 |
 | trade\_no | string | 可选 | 交易流水号 |
@@ -891,15 +891,15 @@ System.out.println(JSON.toJSONString(param));
 
 #### 公共请求参数
 
-| 参数名称 | 参数类型 | 是否必须 | 参数描述 |
-| :--- | :--- | :--- | :--- |
-| app\_id | string | 是 | 商户的appid |
-| method | string | 是 | 调用的接口，blockpay.currency.list |
-| timestamp | long | 是 | 调用时间戳 |
-| version | string | 是 | 调用的接口版本，固定为：1.0 |
-| notify\_url | string | 否 | 支付回调地址
-| biz\_content | string | 是 | 业务请求参数的集合 ，json格式 |
-| sign | string | 是 | 接口签名，[签名算法](#支付签名) |
+| 参数名称 | 参数类型 | 是否必须 | 最大长度 | 参数描述 |
+| :--- | :--- | :--- | :--- | :--- |
+| app\_id | string | 是 | 16 | 商户的appid |
+| method | string | 是 | - | 调用的接口，blockpay.currency.list |
+| timestamp | long | 是 | - | 调用时间戳 |
+| version | string | 是 | - | 调用的接口版本，固定为：1.0 |
+| notify\_url | string | 否 | 256 | 支付回调地址
+| biz\_content | string | 是 | - | 业务请求参数的集合 ，json格式 |
+| sign | string | 是 | - | 接口签名，[签名算法](#支付签名) |
 #### 请求参数
 
 #### 公共响应参数
