@@ -50,9 +50,9 @@ BlockPay支付
 当小应用需要授权时，小应用client控制页面访问布洛克城授权页面：
 
 ```
-沙箱环境地址：https://sandbox.blockcity.gxb.io/#/oauth/authorize?responsetype=code&clientid=&redirect_uri=https%3A%2F%2Fxxx&state=
+沙箱环境地址：https://sandbox.blockcity.gxb.io/#/oauth/authorize?response_type=code&client_id=&redirect_uri=https%3A%2F%2Fxxx&state=
 
-正式环境地址：https://blockcity.gxb.io/#/oauth/authorize?responsetype=code&clientid=&redirect_uri=https%3A%2F%2Fxxx&state=
+正式环境地址：https://blockcity.gxb.io/#/oauth/authorize?response_type=code&client_id=&redirect_uri=https%3A%2F%2Fxxx&state=
 ```
 
 参数说明：
