@@ -210,11 +210,11 @@ BlockCity.choosePay({
 | 参数 | 类型 | 是否必须 | 描述 |
 | :--- | :--- | :--- | :--- |
 | appId | string | 是 | 应用id |
-| tradeNo | string | 是 | 支付订单号 | 
-| outTradeNo | string | 是 | 商户唯一订单号 | 
-| paySuccess | boolean | 是 | 是否支付成功 | 
-| callbackParams | string | 否 | 预创建时商户传入的参数 | 
-| sign | string | 是 | 回调签名，签名方式：RSA("appId=&outTradeNo=&paySuccess=&tradeNo=","公钥") | 
+| tradeNo | string | 是 | 支付订单号 |
+| outTradeNo | string | 是 | 商户唯一订单号 |
+| paySuccess | boolean | 是 | 是否支付成功 |
+| callbackParams | string | 否 | 预创建时商户传入的参数 |
+| sign | string | 是 | 回调签名，签名方式：RSA("appId=&outTradeNo=&paySuccess=&tradeNo=","公钥") |
 
 * 校验签名示例
 
@@ -400,7 +400,7 @@ import BlockCity from 'blockcity-js-sdk';
 ```
 BlockCity.shareConfig({
     title: '',
-    shareDesc: '',
+    shareDes: '',
     url: '',
     thumbUrl: '',
     success: function() {

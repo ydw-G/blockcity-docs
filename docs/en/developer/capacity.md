@@ -50,9 +50,9 @@ BlockPay支付
 当小应用需要授权时，小应用client控制页面访问布洛克城授权页面：
 
 ```
-沙箱环境地址：https://sandbox.blockcity.gxb.io/#/oauth/authorize?responsetype=code&clientid=&redirect_uri=https%3A%2F%2Fxxx&state=
+沙箱环境地址：https://sandbox.blockcity.gxb.io/#/oauth/authorize?response_type=code&client_id=&redirect_uri=https%3A%2F%2Fxxx&state=
 
-正式环境地址：https://blockcity.gxb.io/#/oauth/authorize?responsetype=code&clientid=&redirect_uri=https%3A%2F%2Fxxx&state=
+正式环境地址：https://blockcity.gxb.io/#/oauth/authorize?response_type=code&client_id=&redirect_uri=https%3A%2F%2Fxxx&state=
 ```
 
 参数说明：
@@ -146,7 +146,7 @@ BlockPay支付是一个基于布洛克城账户，资金，支付体系，支持
 
 #### 2.1.2 上传应用公钥
 
-开发者需创建一对RSA公私钥，公钥上传给布洛克城开放平台，在小应用服务端用私钥加密签名生成sign，作为支付接口必要请求参数。
+开发者需创建一对RSA公私钥，公钥上传给布洛克城开放平台，在小应用服务端用私钥加密签名生成sign，作为支付接口必要请求参数。生成公私钥对可使用[RSA生成工具](http://web.chacuo.net/netrsakeypair)，设置密钥位数为2048位，秘钥格式为PKCS#8,证书密码不用设置
 
 ![img](/blockcity/img/d-3-5.png)
 
@@ -210,11 +210,11 @@ BlockCity.choosePay({
 | 参数 | 类型 | 是否必须 | 描述 |
 | :--- | :--- | :--- | :--- |
 | appId | string | 是 | 应用id |
-| tradeNo | string | 是 | 支付订单号 | 
-| outTradeNo | string | 是 | 商户唯一订单号 | 
-| paySuccess | boolean | 是 | 是否支付成功 | 
-| callbackParams | string | 否 | 预创建时商户传入的参数 | 
-| sign | string | 是 | 回调签名，签名方式：RSA("appId=&outTradeNo=&paySuccess=&tradeNo=","公钥") | 
+| tradeNo | string | 是 | 支付订单号 |
+| outTradeNo | string | 是 | 商户唯一订单号 |
+| paySuccess | boolean | 是 | 是否支付成功 |
+| callbackParams | string | 否 | 预创建时商户传入的参数 |
+| sign | string | 是 | 回调签名，签名方式：RSA("appId=&outTradeNo=&paySuccess=&tradeNo=","公钥") |
 
 * 校验签名示例
 
@@ -400,7 +400,7 @@ import BlockCity from 'blockcity-js-sdk';
 ```
 BlockCity.shareConfig({
     title: '',
-    shareDesc: '',
+    shareDes: '',
     url: '',
     thumbUrl: '',
     success: function() {
