@@ -267,7 +267,7 @@ System.out.println(JSON.toJSONString(param));
 
   > <font size="2">正式环境 ：[https://open.blockcity.gxb.io/api/user/baseinfo?client\_id=2wE3tlWcRdVRaHhi&method=user.baseinfo&access\_token=d12fd13rf3f&timestamp=1524658239010&sign=3d73f456febfa81a97f626c56d7a6419](https://open.blockcity.gxb.io/api/user/baseinfo?client_id=2wE3tlWcRdVRaHhi&method=user.baseinfo&access_token=d12fd13rf3f&timestamp=1524658239010&sign=3d73f456febfa81a97f626c56d7a6419)</font>
   >
-  > <font size="2">沙箱环境 ： [http://sandbox.blockcity.gxb.io/openai/user/baseinfo?client\_id=2wE3tlWcRdVRaHhi&method=user.baseinfo&access\_token=d12fd13rf3f&timestamp=1524658239010&sign=3d73f456febfa81a97f626c56d7a6419](http://sandbox.blockcity.gxb.io/openai/user/baseinfo?client_id=2wE3tlWcRdVRaHhi&method=user.baseinfo&access_token=d12fd13rf3f&timestamp=1524658239010&sign=3d73f456febfa81a97f626c56d7a6419)</font>
+  > <font size="2">沙箱环境 ： [http://sandbox.blockcity.gxb.io/openapi/user/baseinfo?client\_id=2wE3tlWcRdVRaHhi&method=user.baseinfo&access\_token=d12fd13rf3f&timestamp=1524658239010&sign=3d73f456febfa81a97f626c56d7a6419](http://sandbox.blockcity.gxb.io/openai/user/baseinfo?client_id=2wE3tlWcRdVRaHhi&method=user.baseinfo&access_token=d12fd13rf3f&timestamp=1524658239010&sign=3d73f456febfa81a97f626c56d7a6419)</font>
 
 #### 响应示例
 
