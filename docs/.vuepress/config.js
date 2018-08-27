@@ -20,6 +20,7 @@ module.exports = {
         sidebarDepth: 3,
         theme: 'vue',
         algolia: {
+            applicationID: 'A35F9ZM5SK',
             apiKey: '9c922922e09306b59a4aed7b9f5aaaf4',
             indexName: 'blockcity'
         },
