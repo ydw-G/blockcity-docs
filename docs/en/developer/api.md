@@ -48,7 +48,7 @@ sign = 5f6e14cbc5326347a3c4c7f87960d64b
 
 #### JAVA代码示例
 
-```
+```java
  <dependency>
     <groupId>commons-codec</groupId>
     <artifactId>commons-codec</artifactId>
@@ -155,7 +155,7 @@ System.out.println(JSON.toJSONString(param));
 
 #### 响应示例
 
-```
+``` json
 {
     "success": true,
     "data": {
@@ -208,7 +208,7 @@ System.out.println(JSON.toJSONString(param));
 
 #### 响应示例
 
-```
+``` json
 {
     "success": true,
     "data": {
@@ -267,11 +267,11 @@ System.out.println(JSON.toJSONString(param));
 
   > <font size="2">正式环境 ：[https://open.blockcity.gxb.io/api/user/baseinfo?client\_id=2wE3tlWcRdVRaHhi&method=user.baseinfo&access\_token=d12fd13rf3f&timestamp=1524658239010&sign=3d73f456febfa81a97f626c56d7a6419](https://open.blockcity.gxb.io/api/user/baseinfo?client_id=2wE3tlWcRdVRaHhi&method=user.baseinfo&access_token=d12fd13rf3f&timestamp=1524658239010&sign=3d73f456febfa81a97f626c56d7a6419)</font>
   >
-  > <font size="2">沙箱环境 ： [http://sandbox.blockcity.gxb.io/openai/user/baseinfo?client\_id=2wE3tlWcRdVRaHhi&method=user.baseinfo&access\_token=d12fd13rf3f&timestamp=1524658239010&sign=3d73f456febfa81a97f626c56d7a6419](http://sandbox.blockcity.gxb.io/openai/user/baseinfo?client_id=2wE3tlWcRdVRaHhi&method=user.baseinfo&access_token=d12fd13rf3f&timestamp=1524658239010&sign=3d73f456febfa81a97f626c56d7a6419)</font>
+  > <font size="2">沙箱环境 ： [http://sandbox.blockcity.gxb.io/openapi/user/baseinfo?client\_id=2wE3tlWcRdVRaHhi&method=user.baseinfo&access\_token=d12fd13rf3f&timestamp=1524658239010&sign=3d73f456febfa81a97f626c56d7a6419](http://sandbox.blockcity.gxb.io/openai/user/baseinfo?client_id=2wE3tlWcRdVRaHhi&method=user.baseinfo&access_token=d12fd13rf3f&timestamp=1524658239010&sign=3d73f456febfa81a97f626c56d7a6419)</font>
 
 #### 响应示例
 
-```
+``` json
 {
     "code": "0",
     "data": {
@@ -289,7 +289,7 @@ System.out.println(JSON.toJSONString(param));
 
 #### 异常示例
 
-```
+``` json
 {
     "code": "0",
     "msg": "错误信息提示",
@@ -385,7 +385,7 @@ System.out.println(JSON.toJSONString(param));
 
 #### 响应示例
 
-```
+``` json
 {
     "success":true,
     "data":{
@@ -399,7 +399,7 @@ System.out.println(JSON.toJSONString(param));
 
 #### 异常示例
 
-```
+``` json
 {
     "success":false,
     "errorCode":"pay.remote.service.error",
@@ -480,7 +480,7 @@ System.out.println(JSON.toJSONString(param));
 
 #### 响应示例
 
-```
+``` json
 {
     "success":true,
     "data":{
@@ -491,7 +491,7 @@ System.out.println(JSON.toJSONString(param));
 
 #### 异常示例
 
-```
+``` json
 {
     "success":false,
     "errorCode":"pay.remote.service.error",
@@ -576,7 +576,7 @@ System.out.println(JSON.toJSONString(param));
 
 #### 响应示例
 
-```
+``` json
 {
     "success":true,
     "data":{
@@ -597,7 +597,7 @@ System.out.println(JSON.toJSONString(param));
 
 #### 异常示例
 
-```
+``` json
 {
     "success":false,
     "errorCode":"pay.remote.service.error",
@@ -674,7 +674,7 @@ System.out.println(JSON.toJSONString(param));
 
 #### 响应示例
 
-```
+``` json
 {
     "success":true,
     "data":{
@@ -685,7 +685,7 @@ System.out.println(JSON.toJSONString(param));
 
 #### 异常示例
 
-```
+``` json
 {
     "success":false,
     "errorCode":"pay.remote.service.error",
@@ -766,7 +766,7 @@ System.out.println(JSON.toJSONString(param));
 
 #### 响应示例
 
-```
+``` json
 {
     "success":true,
     "data":{
@@ -784,7 +784,7 @@ System.out.println(JSON.toJSONString(param));
 
 #### 异常示例
 
-```
+``` json
 {
     "success":false,
     "errorCode":"pay.remote.service.error",
@@ -856,7 +856,7 @@ System.out.println(JSON.toJSONString(param));
 
 #### 响应示例
 
-```
+``` json
 {
     "success":true
 }
@@ -864,7 +864,7 @@ System.out.println(JSON.toJSONString(param));
 
 #### 异常示例
 
-```
+``` json
 {
     "success":false,
     "errorCode":"pay.remote.service.error",
@@ -929,7 +929,7 @@ System.out.println(JSON.toJSONString(param));
 
 #### 响应示例
 
-```
+``` json
 {
     "success":true,
     "data":["GXS","BTC"]
@@ -938,7 +938,7 @@ System.out.println(JSON.toJSONString(param));
 
 #### 异常示例
 
-```
+``` json
 {
     "success":false,
     "errorCode":"pay.remote.service.error",

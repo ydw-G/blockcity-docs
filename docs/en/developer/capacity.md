@@ -152,15 +152,25 @@ BlockPay支付是一个基于布洛克城账户，资金，支付体系，支持
 
 #### 2.1.3 引入Blockcity JS-SDK
 
-安装
+#### CDN引入
 
+通过 [unpkg.com/blockcity-js-sdk](https://unpkg.com/blockcity-js-sdk/) 可以看到 Blockcity JS-SDK 最新版本的资源，也可以切换版本选择需要的资源，在页面上引入 js 文件即可开始使用：
+
+``` javascript
+<script src="//unpkg.com/blockcity-js-sdk/dist/blockcity-js-sdk.min.js"></script>
 ```
+
+#### NPM安装
+
+推荐使用 npm 来安装，享受生态圈和工具带来的便利，更好地和 webpack 配合使用。
+
+``` bash
 npm install blockcity-js-sdk -save
 ```
 
-使用
+npm使用
 
-```
+``` javascript
 import BlockCity from 'blockcity-js-sdk';
 ```
 
@@ -184,7 +194,7 @@ import BlockCity from 'blockcity-js-sdk';
 
 小应用使用trade\_no，唤起布洛克城BlockPay收银台。用户输入密码进行支付，支持成功，失败，取消都会有对应的js回调，小应用客户端可以分别对这些操作做出响应。在支付完成（成功或取消）后，收银台会隐藏页面并返回之前唤起收银台的页面。
 
-```
+``` javascript
 BlockCity.choosePay({
     tradeNo: ''
     success: function() {
@@ -246,7 +256,7 @@ BlockCity.choosePay({
 
 * 回调JSON请求示例：
 
-```
+``` json
 {
     "appId":"应用id"
     "tradeNo": "支付订单号"
@@ -259,7 +269,7 @@ BlockCity.choosePay({
 
 * 回调接口返回要求：
 
-```
+``` json
 {
     "success": true
 }
@@ -299,23 +309,34 @@ BlockCity.choosePay({
 
 #### 2.1 开发准备
 
-#### 安装
+#### CDN引入
 
+通过 [unpkg.com/blockcity-js-sdk](https://unpkg.com/blockcity-js-sdk/) 可以看到 Blockcity JS-SDK 最新版本的资源，也可以切换版本选择需要的资源，在页面上引入 js 文件即可开始使用：
+
+``` javascript
+<script src="//unpkg.com/blockcity-js-sdk/dist/blockcity-js-sdk.min.js"></script>
 ```
+
+#### NPM安装
+
+推荐使用 npm 来安装，享受生态圈和工具带来的便利，更好地和 webpack 配合使用。
+
+``` bash
 npm install blockcity-js-sdk -save
 ```
 
-#### 使用
+npm使用
 
-```
+``` javascript
 import BlockCity from 'blockcity-js-sdk';
 ```
+
 
 #### 2.2 功能接入
 
 给开发者能力直接退出当前的WebView。
 
-```
+``` javascript
 BlockCity.closeWindow();
 ```
 
@@ -339,15 +360,25 @@ BlockCity.closeWindow();
 
 #### 2.1 开发准备
 
-#### 安装
+#### CDN引入
 
+通过 [unpkg.com/blockcity-js-sdk](https://unpkg.com/blockcity-js-sdk/) 可以看到 Blockcity JS-SDK 最新版本的资源，也可以切换版本选择需要的资源，在页面上引入 js 文件即可开始使用：
+
+``` javascript
+<script src="//unpkg.com/blockcity-js-sdk/dist/blockcity-js-sdk.min.js"></script>
 ```
+
+#### NPM安装
+
+推荐使用 npm 来安装，享受生态圈和工具带来的便利，更好地和 webpack 配合使用。
+
+``` bash
 npm install blockcity-js-sdk -save
 ```
 
-#### 使用
+npm使用
 
-```
+``` javascript
 import BlockCity from 'blockcity-js-sdk';
 ```
 
@@ -355,7 +386,7 @@ import BlockCity from 'blockcity-js-sdk';
 
 唤起二维码扫一扫。
 
-```
+``` javascript
 BlockCity.qrScan(function (result) {
     console.log(result)
 })
@@ -381,23 +412,34 @@ BlockCity.qrScan(function (result) {
 
 #### 2.1 开发准备
 
-#### 安装
+#### CDN引入
 
+通过 [unpkg.com/blockcity-js-sdk](https://unpkg.com/blockcity-js-sdk/) 可以看到 Blockcity JS-SDK 最新版本的资源，也可以切换版本选择需要的资源，在页面上引入 js 文件即可开始使用：
+
+``` javascript
+<script src="//unpkg.com/blockcity-js-sdk/dist/blockcity-js-sdk.min.js"></script>
 ```
+
+#### NPM安装
+
+推荐使用 npm 来安装，享受生态圈和工具带来的便利，更好地和 webpack 配合使用。
+
+``` bash
 npm install blockcity-js-sdk -save
 ```
 
-#### 使用
+npm使用
 
-```
+``` javascript
 import BlockCity from 'blockcity-js-sdk';
 ```
+
 
 #### 2.2 功能接入
 
 配置分享标题、描述、缩略图、URL。
 
-```
+``` javascript
 BlockCity.shareConfig({
     title: '',
     shareDes: '',
