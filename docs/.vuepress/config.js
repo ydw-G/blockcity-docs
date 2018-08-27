@@ -21,7 +21,7 @@ module.exports = {
         theme: 'vue',
         algolia: {
             apiKey: '9c922922e09306b59a4aed7b9f5aaaf4',
-            indexName: 'blockcity-docs'
+            indexName: 'blockcity'
         },
         locales: {
             '/': {
