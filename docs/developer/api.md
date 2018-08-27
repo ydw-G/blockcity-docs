@@ -82,7 +82,7 @@ public static String signRequest(Map<String, String> params) throws IOException 
 
 为了防止API调用过程中被黑客恶意篡改，调用任何一个API都需要携带签名，服务端会根据请求参数，对签名进行验证，签名不合法的请求将会被拒绝。
 
-开发者需提供一对RSA(2048位)公私钥，公钥上传给布洛克城，在小应用服务端用私钥加密签名串，传在sign字段里。公私钥可以通过[在线生成工具](http://tools.jb51.net/password/rsa_encode)生成，密钥位数请选择2048位。
+开发者需提供一对RSA(2048位)公私钥，公钥上传给布洛克城，在小应用服务端用私钥加密签名串，传在sign字段里。公私钥可以通过[在线生成工具](http://http://web.chacuo.net/netrsakeypair)生成，密钥位数请选择2048位，加密格式为PKCS#8。
 
 加密内容 ： rsa\(biz\_content+timestamp\)
 
