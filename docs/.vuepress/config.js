@@ -20,8 +20,8 @@ module.exports = {
         sidebarDepth: 3,
         theme: 'vue',
         algolia: {
-            apiKey: '2fee0b32ca89ecec664388d4397f68ad',
-            indexName: 'blockcity'
+            apiKey: '9c922922e09306b59a4aed7b9f5aaaf4',
+            indexName: 'blockcity-docs'
         },
         locales: {
             '/': {
