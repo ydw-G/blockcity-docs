@@ -441,7 +441,7 @@ import BlockCity from 'blockcity-js-sdk';
 
 配置分享标题、描述、缩略图、URL。
 
-分享URL不支持单页面应用hash模式（在路由中带有#号）。
+<font color="#dd0000">分享URL不支持单页面应用hash模式（在路由中带有#号）</font>
 
 ``` javascript
 BlockCity.shareConfig({
