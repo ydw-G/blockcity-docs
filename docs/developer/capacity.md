@@ -150,6 +150,18 @@ BlockPay支付是一个基于布洛克城账户，资金，支付体系，支持
 
 ![img](/blockcity/img/d-3-5.png)
 
+上传公钥格式，不要带上“-----BEGIN PUBLIC KEY-----”和“-----END PUBLIC KEY-----”
+
+``` java
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAm8MBCBTrNJWGyyA9W7aW
+juY6j/APar4ZCkGkuJCU6TdRiYgeE4X1pU+V8KV1j2xDmO3aaUSx8Qwrofmue3QK
+Cx8PD3e6Bgw/IjDBIgfOXp1wygTzfFLWu+l2jXs1JBV6jvekCjT7luZQrB9hSTgg
+1tZ44+ZQFkilRdwdsL1t9ajeAYa61YoYyCe/nitLJqAXfwlvKrVyaot8q8cd/f0X
+26SxWtro3hLHvuyTmsu+ihmbotWw64bBI9dmklGziHJXThNr+pyjzKgSz4fzMdyl
+uATOTMpL2j0U6sFlI1hfhvNMKuHOaIYniP4zFEPs/5tw5fZrHMVnGn6V8LFj5kDP
+BQIDAQAB
+``` 
+
 #### 2.1.3 引入Blockcity JS-SDK
 
 #### CDN引入
@@ -241,7 +253,7 @@ BlockCity.choosePay({
                 .append("&outTradeNo=").append(param.getOutTradeNo())
                 .append("&paySuccess=").append(param.isPaySuccess())
                 .append("&tradeNo=").append(param.getTradeNo());
-        if(RsaSignature.rsaDecrypt(builder.toString(),"私钥").equals(param.getSign())){
+        if(RsaSignature.rsaDecrypt(param.getSign(),"私钥").equals(builder.toString())){
             //签名通过
         }
 ```
