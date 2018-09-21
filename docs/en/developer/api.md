@@ -82,7 +82,7 @@ public static String signRequest(Map<String, String> params) throws IOException 
 
 为了防止API调用过程中被黑客恶意篡改，调用任何一个API都需要携带签名，服务端会根据请求参数，对签名进行验证，签名不合法的请求将会被拒绝。
 
-开发者需提供一对RSA(2048位)公私钥，公钥上传给布洛克城，在小应用服务端用私钥加密签名串，传在sign字段里。公私钥可以通过[在线生成工具](http://tools.jb51.net/password/rsa_encode)生成，密钥位数请选择2048位。
+开发者需提供一对RSA(2048位)公私钥，公钥上传给布洛克城，在小应用服务端用私钥加密签名串，传在sign字段里。公私钥可以通过[在线生成工具](http://web.chacuo.net/netrsakeypair)生成，密钥位数请选择2048位，加密格式为PKCS#8。
 
 加密内容 ： rsa\(biz\_content+timestamp\)
 
@@ -227,7 +227,7 @@ System.out.println(JSON.toJSONString(param));
 
 | 环境 | HTTPS请求地址 |
 | :--- | :--- |
-| 沙箱环境 | [https://sandbox.blockcity.gxb.io/api/user/baseinfo](https://sandbox.blockcity.gxb.io/api/user/baseinfo) |
+| 沙箱环境 | [https://sandbox.blockcity.gxb.io/openapi/user/baseinfo](https://sandbox.blockcity.gxb.io/openapi/user/baseinfo) |
 | 正式环境 | [https://open.blockcity.gxb.io/api/user/baseinfo](https://open.blockcity.gxb.io/api/user/baseinfo) |
 
 #### 公共请求参数
@@ -267,7 +267,7 @@ System.out.println(JSON.toJSONString(param));
 
   > <font size="2">正式环境 ：[https://open.blockcity.gxb.io/api/user/baseinfo?client\_id=2wE3tlWcRdVRaHhi&method=user.baseinfo&access\_token=d12fd13rf3f&timestamp=1524658239010&sign=3d73f456febfa81a97f626c56d7a6419](https://open.blockcity.gxb.io/api/user/baseinfo?client_id=2wE3tlWcRdVRaHhi&method=user.baseinfo&access_token=d12fd13rf3f&timestamp=1524658239010&sign=3d73f456febfa81a97f626c56d7a6419)</font>
   >
-  > <font size="2">沙箱环境 ： [http://sandbox.blockcity.gxb.io/openapi/user/baseinfo?client\_id=2wE3tlWcRdVRaHhi&method=user.baseinfo&access\_token=d12fd13rf3f&timestamp=1524658239010&sign=3d73f456febfa81a97f626c56d7a6419](http://sandbox.blockcity.gxb.io/openai/user/baseinfo?client_id=2wE3tlWcRdVRaHhi&method=user.baseinfo&access_token=d12fd13rf3f&timestamp=1524658239010&sign=3d73f456febfa81a97f626c56d7a6419)</font>
+  > <font size="2">沙箱环境 ： [https://sandbox.blockcity.gxb.io/openapi/user/baseinfo?client\_id=2wE3tlWcRdVRaHhi&method=user.baseinfo&access\_token=d12fd13rf3f&timestamp=1524658239010&sign=3d73f456febfa81a97f626c56d7a6419](http://sandbox.blockcity.gxb.io/openapi/user/baseinfo?client_id=2wE3tlWcRdVRaHhi&method=user.baseinfo&access_token=d12fd13rf3f&timestamp=1524658239010&sign=3d73f456febfa81a97f626c56d7a6419)</font>
 
 #### 响应示例
 
@@ -307,6 +307,7 @@ System.out.println(JSON.toJSONString(param));
 | param.appid.invalid | app\_id无效 |
 | param.invalid | 非法参数 |
 | default.error | 服务异常 |
+
 
 ## 支付API
 
@@ -442,7 +443,7 @@ System.out.println(JSON.toJSONString(param));
 
 | 参数 | 类型 | 是否必须 | 最大长度 | 描述 |
 | :--- | :--- | :--- | :---| :--- |
-| to\_user | string | 是 | 32 | 转入方的用户id，可根据交易详情查询buyer\_id，也可通过auth的/user/baseinfo接口获取用户的uuid |
+| to\_user | string | 是 | 32 | 转入方的用户uuid，可根据交易详情查询buyer\_id，也可通过auth的/user/baseinfo接口获取用户的uuid |
 | amount | double | 是 | - | 转账金额 |
 | currency | string | 是 | 32 | 币种 |
 | remark | string | 否 | 256 | 备注 |
@@ -469,6 +470,10 @@ System.out.println(JSON.toJSONString(param));
 | pay.param.currency.not\_support | 不支持的币种 |
 | pay.param.notify\_url.empty | 回调地址不能为空 |
 | pay.param.invalid | 参数不合法 |
+| pay.api.transfer.out_transfer_no.exist | 外部转账流水号已存在 |
+| pay.api.transfer.to_user.not_exist | 转入方不存在 |
+| pay.error.balance.lack | 账户余额不足 |
+| pay.error.failed | 支付异常，请重试 |
 
 #### 响应参数
 

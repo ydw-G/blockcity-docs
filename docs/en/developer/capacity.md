@@ -84,7 +84,10 @@ https://xxx?code=124124&state=
 
 **第五步：小应用客户端保存登录信息**
 
-* 用户授权完成后，需要在小应用客户端维护这个用户的登录状态，避免重复授权。
+* 用户授权完成后，需要在小应用客户端维护这个用户的登录状态,可以**存localstorage**能保持更长的登录状态，不要存cookie，容易丢失，当登录状态失效时需触发重新授权。
+* access_token的有效期为30天，刷新再延长30天，当access_token失效时，请重新授权。
+* 另外当用户登出布洛克城时，布洛克城会失效用户对应用的授权access_token，所以判断localstorage的登录信息的同时，查询用户基本信息接口验证access_token有效性。避免用户登出后换个手机号登录，应用内的登录状态还是之前一个账号的情况。
+
 
 ### 数据API列表
 
@@ -149,6 +152,18 @@ BlockPay支付是一个基于布洛克城账户，资金，支付体系，支持
 开发者需创建一对RSA公私钥，公钥上传给布洛克城开放平台，在小应用服务端用私钥加密签名生成sign，作为支付接口必要请求参数。生成公私钥对可使用[RSA生成工具](http://web.chacuo.net/netrsakeypair)，设置密钥位数为2048位，秘钥格式为PKCS#8,证书密码不用设置
 
 ![img](/blockcity/img/d-3-5.png)
+
+上传公钥格式，不要带上“-----BEGIN PUBLIC KEY-----”和“-----END PUBLIC KEY-----”
+
+``` java
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAm8MBCBTrNJWGyyA9W7aW
+juY6j/APar4ZCkGkuJCU6TdRiYgeE4X1pU+V8KV1j2xDmO3aaUSx8Qwrofmue3QK
+Cx8PD3e6Bgw/IjDBIgfOXp1wygTzfFLWu+l2jXs1JBV6jvekCjT7luZQrB9hSTgg
+1tZ44+ZQFkilRdwdsL1t9ajeAYa61YoYyCe/nitLJqAXfwlvKrVyaot8q8cd/f0X
+26SxWtro3hLHvuyTmsu+ihmbotWw64bBI9dmklGziHJXThNr+pyjzKgSz4fzMdyl
+uATOTMpL2j0U6sFlI1hfhvNMKuHOaIYniP4zFEPs/5tw5fZrHMVnGn6V8LFj5kDP
+BQIDAQAB
+``` 
 
 #### 2.1.3 引入Blockcity JS-SDK
 
@@ -241,7 +256,7 @@ BlockCity.choosePay({
                 .append("&outTradeNo=").append(param.getOutTradeNo())
                 .append("&paySuccess=").append(param.isPaySuccess())
                 .append("&tradeNo=").append(param.getTradeNo());
-        if(RsaSignature.rsaDecrypt(builder.toString(),"私钥").equals(param.getSign())){
+        if(RsaSignature.rsaDecrypt(param.getSign(),"私钥").equals(builder.toString())){
             //签名通过
         }
 ```
