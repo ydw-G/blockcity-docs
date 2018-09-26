@@ -166,6 +166,17 @@ System.out.println(JSON.toJSONString(param));
 }
 ```
 
+### 业务错误码
+
+| code | 描述 |
+| :--- | :--- |
+| app.appid.invalid | appid不存在 |
+| auth.request.expire | 授权请求过期 |
+| auth.request.status.error | 授权code已经授权得到access_token，不能重复请求 |
+| auth.request.code.error | 授权code不存在 |
+| auth.token.status.error | access_token状态已过期 |
+
+
 ### 刷新令牌
 
 每个access\_token目前有效期为30天，可调用refresh接口刷新时长，再次刷新有效期为30天，只能刷新一次。
@@ -237,7 +248,7 @@ System.out.println(JSON.toJSONString(param));
 | client\_id | string | 是 | 16 | appId |
 | method | string | 是 | - | 调用的接口，user.baseinfo |
 | access\_token | string | 是 | 32 | 用户访问令牌 |
-| timestamp | string | 是 | - | 时间戳，与服务器时间相差在5分钟以内才有效 |
+| timestamp | string | 是 | - | 13位时间戳（精确到毫秒），与服务器时间相差在5分钟以内才有效 |
 | sign | string | 是 | - | 接口签名，[令牌签名算法](api.html#令牌签名) |
 
 #### 公共响应参数
@@ -334,7 +345,7 @@ System.out.println(JSON.toJSONString(param));
 | :--- | :--- | :--- | :--- | :--- |
 | app\_id | string | 是 | 16 | 商户的appid |
 | method | string | 是 | - | 调用的接口，blockpay.trade.app.pay |
-| timestamp | long | 是 | - | 调用时间戳 |
+| timestamp | long | 是 | - | 13位时间戳（精确到毫秒） |
 | version | string | 是 | - | 调用的接口版本，固定为：1.0 |
 | notify\_url | string | 否 | 256 | 支付回调地址 |
 | biz\_content | string | 是 | - | 业务请求参数的集合 ，json格式 |
@@ -433,7 +444,7 @@ System.out.println(JSON.toJSONString(param));
 | :--- | :--- | :--- | :--- | :--- |
 | app\_id | string | 是 | 16 | 商户的appid |
 | method | string | 是 | - | 调用的接口，blockpay.trade.transfer |
-| timestamp | long | 是 | - | 调用时间戳 |
+| timestamp | long | 是 | - | 13位时间戳（精确到毫秒） |
 | version | string | 是 | - | 调用的接口版本，固定为：1.0 |
 | notify\_url | string | 否 | 256 | 支付回调地址 |
 | biz\_content | string | 是 | - | 业务请求参数的集合 ，json格式 |
@@ -527,7 +538,7 @@ System.out.println(JSON.toJSONString(param));
 | :--- | :--- | :--- | :---| :--- |
 | app\_id | string | 是 | 16 | 商户的appid |
 | method | string | 是 | - | 调用的接口，blockpay.trade.detail |
-| timestamp | long | 是 | - | 调用时间戳 |
+| timestamp | long | 是 | - | 13位时间戳（精确到毫秒） |
 | version | string | 是 | - | 调用的接口版本，固定为：1.0 |
 | notify\_url | string | 否 | 256 | 支付回调地址 |
 | biz\_content | string | 是 | - | 业务请求参数的集合 ，json格式 |
@@ -633,7 +644,7 @@ System.out.println(JSON.toJSONString(param));
 | :--- | :--- | :--- | :---| :--- |
 | app\_id | string | 是 | 16 | 商户的appid |
 | method | string | 是 | - | 调用的接口，blockpay.trade.refund |
-| timestamp | long | 是 | - | 调用时间戳 |
+| timestamp | long | 是 | - | 13位时间戳（精确到毫秒） |
 | version | string | 是 | - | 调用的接口版本，固定为：1.0 |
 | notify\_url | string | 否 | 256 | 支付回调地址
 | biz\_content | string | 是 | - | 业务请求参数的集合 ，json格式 |
@@ -721,7 +732,7 @@ System.out.println(JSON.toJSONString(param));
 | :--- | :--- | :--- | :---| :--- |
 | app\_id | string | 是 | 16 | 商户的appid |
 | method | string | 是 | - | 调用的接口，blockpay.trade.refund.query |
-| timestamp | long | 是 | - | 调用时间戳 |
+| timestamp | long | 是 | - | 13位时间戳（精确到毫秒） |
 | version | string | 是 | - | 调用的接口版本，固定为：1.0 |
 | notify\_url | string | 否 | 256 | 支付回调地址
 | biz\_content | string | 是 | - | 业务请求参数的集合 ，json格式 |
@@ -821,7 +832,7 @@ System.out.println(JSON.toJSONString(param));
 | :--- | :--- | :--- | :--- | :--- |
 | app\_id | string | 是 | 16 | 商户的appid |
 | method | string | 是 | - | 调用的接口，blockpay.trade.close |
-| timestamp | long | 是 | - | 调用时间戳 |
+| timestamp | long | 是 | - | 13位时间戳（精确到毫秒） |
 | version | string | 是 | - | 调用的接口版本，固定为：1.0 |
 | notify\_url | string | 否 | 256 | 支付回调地址
 | biz\_content | string | 是 | - | 业务请求参数的集合 ，json格式 |
@@ -900,7 +911,7 @@ System.out.println(JSON.toJSONString(param));
 | :--- | :--- | :--- | :--- | :--- |
 | app\_id | string | 是 | 16 | 商户的appid |
 | method | string | 是 | - | 调用的接口，blockpay.currency.list |
-| timestamp | long | 是 | - | 调用时间戳 |
+| timestamp | long | 是 | - | 13位时间戳（精确到毫秒） |
 | version | string | 是 | - | 调用的接口版本，固定为：1.0 |
 | notify\_url | string | 否 | 256 | 支付回调地址
 | biz\_content | string | 是 | - | 业务请求参数的集合 ，json格式 |
