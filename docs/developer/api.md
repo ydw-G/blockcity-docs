@@ -20,6 +20,7 @@
 ```
 method = "user.baseinfo"
 client_id = "2wE3tlWcRdVRaHhi"
+client_secret = "bapi1V1FqvOkPHDMUWdBtzYD83sY0nsN"
 access_token = "d12fd13rf3f"
 timestamp = "1524714213828"
 ```
