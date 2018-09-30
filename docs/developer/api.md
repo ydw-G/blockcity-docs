@@ -979,3 +979,144 @@ private function sign($data)
     "errorMsg":"服务错误"
 }
 ```
+
+## 卡券
+
+该卡券功能在内测阶段，如果要接入请联系管理员。
+
+### 用户领取推送请求
+
+该请求是布洛克城服务端推送给第三方应用的请求，需要应用方提供接口路径给布洛克城，一个应用对应一个接口路径。
+
+> 接口路径示例： https://www.baidu.com/cardVoucher/activate
+
+* 请求参数
+
+|参数|类型|是否必须|描述|
+|:--|:--|:--|:--|
+|appId|string|是|应用id|
+|sequence|string|是|请求业务号（全局唯一）|
+|pushItem|string|是|推送类别|
+|notifyJson|string|是|推送内容|
+|sign|string|是|签名|
+|remark|string|否|备注信息|
+
+> sequence用来作为定位请求信息的重要参数，**建议留存**。
+> 
+> sign为签名参数，作为判断是布洛克城发出的请求。
+
+* notifyJson参数
+
+|参数|类型|是否必须|描述|
+|:--|:--|:--|:--|
+|cvKey|string(32)|是|卡券配置key，全局唯一|
+|cvSequence|string(32)|是|卡券标识，全局唯一|
+|uuid|string|是|用户uuid|
+
+> cvKey与cvSequence的关系是一对多，含义是一个用户可以拥有同种配置下的多张卡券。
+
+* 验证数据的正确性
+
+在签名校验成功后，请严格校验：1.appId是否为该商户本身，2.putshItem固定为app.card.voucher.activate，3.sequence为请求参数中的sequence。
+
+* 验证示意JAVA代码
+
+```java
+String content = AppRsaSignUtils.rsaDecrypt(sign,APP_PRIVATE_KEY);
+JSONObject object = JSON.parseObject(content);
+
+if (APP_ID.equals(object.getString("appId")) && PUSH_ITEM.equals(object.getString("pushItem")) && sequence.equals(object.getString("sequence"))) {
+	// todo 业务流程...
+}
+```
+
+* 代码下载
+
+[JAVA代码示例下载](http://gxb-doc.oss-cn-hangzhou.aliyuncs.com/blockcity/card-voucher-demo.zip)
+
+* 请求示例：
+
+``` json
+{
+    "appId":"应用id",
+    "sequence": "业务号",
+    "pushItem":"推送类别",
+    "uuid":"用户uuid",
+    "notifyJson":"业务参数json",
+    "sign":"签名"
+}
+```
+
+* 回调接口返回要求：
+
+该内容需应用方返回给布洛克城服务端
+
+``` json
+{
+    "message": "success"
+}
+```
+
+> 若返回内容不符合要求，则布洛克服务端会重试推送，直到应用方返回该内容为止。
+
+### 用户使用卡券通知
+
+该请求的业务场景是当用户在应用方使用了该卡券的同时，需通知布洛克城该用户已使用该卡券。
+
+* 请求路径： `/customer/cardVoucher/use`
+
+* 请求方式： POST JSON
+
+* 请求参数
+
+|参数|类型|是否必须|描述|
+|:--|:--|:--|:--|
+|appId|string|是|应用id|
+|uuid|string|是|用户uuid|
+|method|string|是|调用方法|
+|cvSequence|string|是|卡券标识|
+|sign|string|是|签名|
+
+> sign需应用方按要求生成，布洛克城服务端会进行校验
+> method固定为customer.card.voucher.use
+
+sign签名JAVA生成规则 
+
+```java
+String sign = AppRsaSignUtils.rsaSign("appId=" + APP_ID + "&cvSequence=" + CVSEQUENCE + "&method=" + METHOD, APP_PRIVATE_KEY);
+```
+
+* 请求示例：
+
+``` json
+{
+    "appId":"应用id",
+    "cvSequence": "业务号",
+    "mehtod":"customer.card.voucher.use",
+    "uuid":"用户uuid",
+    "sign":"签名"
+}
+```
+
+
+#### 响应示例
+
+``` json
+{
+    "message":"",
+    "data":null
+}
+```
+
+#### 业务错误码
+
+| code | 描述 |
+| :--- | :--- |
+| app.error.no.exit| app不存在 |
+| app.error.no.public.key | 没有配置公私钥 |
+| app.error.sign.error | 验签失败 |
+| app.error.card.voucher.no.exit | 卡券不存在 |
+| app.error.card.voucher.user.error | 用户不匹配 |
+
+
+
