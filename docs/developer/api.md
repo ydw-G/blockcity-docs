@@ -978,7 +978,6 @@ System.out.println(JSON.toJSONString(param));
 |参数|类型|是否必须|描述|
 |:--|:--|:--|:--|
 |appId|string|是|应用id|
-|uuid|string|是|用户uuid|
 |sequence|string|是|请求业务号（全局唯一）|
 |pushItem|string|是|推送类别|
 |notifyJson|string|是|推送内容|
@@ -1016,7 +1015,7 @@ if (APP_ID.equals(object.getString("appId")) && PUSH_ITEM.equals(object.getStrin
 
 * 代码下载
 
-[JAVA代码示例下载](http://gxb-doc.oss-cn-hangzhou.aliyuncs.com/blockpay/paydemo.zip)
+[JAVA代码示例下载](http://gxb-doc.oss-cn-hangzhou.aliyuncs.com/blockcity/card-voucher-demo.zip)
 
 * 请求示例：
 
