@@ -84,9 +84,9 @@ https://xxx?code=124124&state=
 
 **第五步：小应用客户端保存登录信息**
 
-* 用户授权完成后，需要在小应用客户端维护这个用户的登录状态,可以**存localstorage**能保持更长的登录状态，不要存cookie，容易丢失，当登录状态失效时需触发重新授权。
-* access_token的有效期为30天，刷新再延长30天，当access_token失效时，请重新授权。
-* 另外当用户登出布洛克城时，布洛克城会失效用户对应用的授权access_token，所以判断localstorage的登录信息的同时，查询用户基本信息接口验证access_token有效性。避免用户登出后换个手机号登录，应用内的登录状态还是之前一个账号的情况。
+* <font color=#DC143C size=3 >用户授权完成后，需要在小应用客户端维护这个用户的登录状态,可以存localstorage能保持更长的登录状态，不要存cookie，容易丢失，当登录状态失效时需触发重新授权。</font>
+* <font color=#DC143C size=3 >access_token的有效期为30天，刷新再延长30天，当access_token失效时，请重新授权。</font>
+* <font color=#DC143C size=3 >另外当用户登出布洛克城时，布洛克城会失效用户对应用的授权access_token，所以判断localstorage的登录信息的同时，查询用户基本信息接口验证access_token有效性。避免用户登出后换个手机号登录，应用内的登录状态还是之前一个账号的情况。</font>
 
 
 ### 数据API列表
@@ -108,6 +108,8 @@ https://xxx?code=124124&state=
 ### 功能介绍
 
 BlockPay支付是一个基于布洛克城账户，资金，支付体系，支持包括GXS，BTC，ETH等主流虚拟货币的全币种支付手段。能帮助小应用开发者完成支付，转账，退款，对账等一列表操作。
+
+支付收款的商户账号为开发者中心绑定的布洛克账号，另外支付方跟收款方不能为同一个账号，测试时注意账号选择。
 
 #### 1.1 功能流程
 
@@ -243,6 +245,8 @@ BlockCity.choosePay({
 
 * 校验签名示例
 
+java代码：
+
 ```java
         PayCallBackParam param = new PayCallBackParam();
         param.setAppId("appId");
@@ -261,9 +265,30 @@ BlockCity.choosePay({
         }
 ```
 
+php代码：
+
+```php
+private function decrypt($content)
+{
+    $priKey = $this->rsa_private_key;
+    $res = openssl_get_privatekey($priKey);
+    $result  = ‘’;
+    $content = base64_decode($content);
+    for ($i = 0; $i < strlen($content) / 256; $i++) {
+        $data = substr($content, $i * 256, 256);
+        openssl_private_decrypt($data, $decrypt, $res);
+        $result .= $decrypt;
+    }
+    openssl_free_key($res);
+    return $result;
+}
+
+```
+
 * 代码下载
 
 [JAVA代码示例下载](http://gxb-doc.oss-cn-hangzhou.aliyuncs.com/blockpay/paydemo.zip)
+
 
 * 验证数据的正确性
 

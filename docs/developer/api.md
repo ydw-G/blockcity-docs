@@ -89,6 +89,8 @@ public static String signRequest(Map<String, String> params) throws IOException 
 
 #### 签名示例
 
+java代码：
+
 ```java
 PayCommonParam param = new PayCommonParam();
 param.setApp_id("");
@@ -104,6 +106,21 @@ initPayParam.setTotal_amount(new BigDecimal(10));
 param.setBiz_content(JSON.toJSONString(initPayParam));
 param.setSign(RsaSignature.rsaSign(param.getBiz_content()+param.getTimestamp(), "rsa私钥"));
 System.out.println(JSON.toJSONString(param));
+```
+
+php代码：
+
+```php
+private function sign($data)
+{
+    $priKey = $this->rsa_private_key;
+    $res = openssl_get_privatekey($priKey);
+    openssl_sign($data, $sign, $res, OPENSSL_ALGO_SHA256);
+    openssl_free_key($res);
+    $sign = base64_encode($sign);
+    return $sign;
+}
+
 ```
 
 #### 代码下载
@@ -459,7 +476,7 @@ System.out.println(JSON.toJSONString(param));
 | amount | double | 是 | - | 转账金额 |
 | currency | string | 是 | 32 | 币种 |
 | remark | string | 否 | 256 | 备注 |
-| pswd | string | 是 | - | 商户绑定布洛克城账号的交易密码，，加密方式，md5\(md5\(密码\)+timestamp\) |
+| pswd | string | 是 | - | 商户绑定布洛克城账号(需到布洛克城app设置)的交易密码，沙箱和正式密码不一样。加密方式：md5\(md5\(密码\)+timestamp\) |
 | outTransferNo | string | 是 | 32 | 商户外部转账no，请传唯一id，一个外部转账no只能转账一次 |
 
 #### 公共响应参数
