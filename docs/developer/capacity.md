@@ -47,6 +47,7 @@ BlockPay支付
 
 **第二步：获取授权code**
 
+**小应用授权:**
 当**小应用**需要授权时，小应用client控制页面访问布洛克城授权页面：
 
 ```
@@ -54,6 +55,8 @@ BlockPay支付
 
 正式环境地址：https://blockcity.gxb.io/#/oauth/authorize?response_type=code&client_id=&redirect_uri=https%3A%2F%2Fxxx&state=
 ```
+
+**原生应用授权:**
 
 同时，布洛克城也支持对**原生应用**进行授权，其行为类似微信授权登录，通过构造下面的链接，让应用去唤起布洛克城，布洛克城完成授权后会根据传入的`redirect_uri`跳转回来
 
@@ -218,7 +221,7 @@ import BlockCity from 'blockcity-js-sdk';
 
 **第三步：唤起收银台**
 
-小应用唤起：
+**小应用唤起：**
 
 小应用使用trade\_no，唤起布洛克城BlockPay收银台。用户输入密码进行支付，支持成功，失败，取消都会有对应的js回调，小应用客户端可以分别对这些操作做出响应。在支付完成（成功或取消）后，收银台会隐藏页面并返回之前唤起收银台的页面。
 
@@ -239,7 +242,7 @@ BlockCity.choosePay({
 
 > <font size="2">小应用需要先引入Blockcity JS-SDK</font>
 
-第三方应用间唤起：
+**原生应用唤起：**
 
 第三方应用可以通过布洛克城的支付协议唤起app进行支付，类似支付宝支付和微信支付，通过构造下面的链接，让应用去唤起布洛克城，布洛克城完成支付后会根据传入的`callbackUrl`跳转回来
 
