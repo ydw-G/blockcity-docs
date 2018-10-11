@@ -45,14 +45,20 @@ BlockPay支付
 
 对于需要用户授权的小应用，每当用户进入小应用时，需要先判断当前用户的登录状态，决定是否需要对当前用户进行GID授权。
 
-**第二步：小应用获取授权code**
+**第二步：获取授权code**
 
-当小应用需要授权时，小应用client控制页面访问布洛克城授权页面：
+当**小应用**需要授权时，小应用client控制页面访问布洛克城授权页面：
 
 ```
 沙箱环境地址：https://sandbox.blockcity.gxb.io/#/oauth/authorize?response_type=code&client_id=&redirect_uri=https%3A%2F%2Fxxx&state=
 
 正式环境地址：https://blockcity.gxb.io/#/oauth/authorize?response_type=code&client_id=&redirect_uri=https%3A%2F%2Fxxx&state=
+```
+
+同时，布洛克城也支持对**原生应用**进行授权，其行为类似微信授权登录，通过构造下面的链接，让应用去唤起布洛克城，布洛克城完成授权后会根据传入的`redirect_uri`跳转回来
+
+```
+blockcity://auth?response_type=code&client_id=&redirect_uri=SCHEME%3A%2F%2Fxxx&state=
 ```
 
 参数说明：
@@ -61,7 +67,7 @@ BlockPay支付
 | :--- | :--- | :--- |
 | response\_type | 是 | 授权类型 ，值为code |
 | client\_id | 是 | 等同于appid，创建应用时获得 |
-| redirect\_uri | 是 | 回调地址，在用户授权后应用会跳转至redirect\_uri，**务必对地址进行urlencode。** |
+| redirect\_uri | 是 | 回调地址，在用户授权后应用会跳转至redirect\_uri，**务必对地址进行urlencode。**, 如果为原生的应用，则redirect_uri为应用的URL_SCHEME, 如微信的URL_SCHEME为: weixin:// |
 | state | 否 | 维持应用的状态，传入值与返回值保持一致 |
 
 获取授权code：
@@ -69,7 +75,8 @@ BlockPay支付
 当用户点击确认授权后，网页会重定向到回调地址，应用从回调地址中获取code。回调请求如下：
 
 ```
-https://xxx?code=124124&state=
+小应用：https://xxx?code=124124&state=
+原生应用：SCHEME://xxx?code=124124&state=
 ```
 
 **第三步：小应用服务端获取access\_token**
@@ -169,6 +176,8 @@ BQIDAQAB
 
 #### 2.1.3 引入Blockcity JS-SDK
 
+> blockcity-js-sdk供布洛克城内的小应用使用，原生app支付接入可以跳过2.1.3这个步骤
+
 #### CDN引入
 
 通过 [unpkg.com/blockcity-js-sdk](https://unpkg.com/blockcity-js-sdk/) 可以看到 Blockcity JS-SDK 最新版本的资源，也可以切换版本选择需要的资源，在页面上引入 js 文件即可开始使用：
@@ -209,6 +218,8 @@ import BlockCity from 'blockcity-js-sdk';
 
 **第三步：唤起收银台**
 
+小应用唤起：
+
 小应用使用trade\_no，唤起布洛克城BlockPay收银台。用户输入密码进行支付，支持成功，失败，取消都会有对应的js回调，小应用客户端可以分别对这些操作做出响应。在支付完成（成功或取消）后，收银台会隐藏页面并返回之前唤起收银台的页面。
 
 ``` javascript
@@ -227,6 +238,15 @@ BlockCity.choosePay({
 ```
 
 > <font size="2">小应用需要先引入Blockcity JS-SDK</font>
+
+第三方应用间唤起：
+
+第三方应用可以通过布洛克城的支付协议唤起app进行支付，类似支付宝支付和微信支付，通过构造下面的链接，让应用去唤起布洛克城，布洛克城完成支付后会根据传入的`callbackUrl`跳转回来
+
+```
+blockcity://pay?tradeNo=xxx&callbackUrl=SCHEME%3A%2F%2Fxxx
+```
+
 
 **第四步：支付回调**
 
