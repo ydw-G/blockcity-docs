@@ -1132,6 +1132,7 @@ String sign = AppRsaSignUtils.rsaSign("appId=" + APP_ID + "&cvSequence=" + CVSEQ
 | 参数名称 | 参数类型 | 是否必须 | 参数描述 |
 | :---    | :---   | :---    | :---    |
 | templateCode | string | 是 | 应用通知模板 |
+| sequenceNo | string | 是 | 应用方消息唯一键(长度32个汉字以内) |
 | title | string | 否 | 通知标题替换变量,多个以英文;间隔(标题长度10个汉字以内) |
 | content | string | 否 | 通知内容替换变量,多个以英文;间隔(通知内容40个汉字以内) |
 | url | string | 否 | 链接地址替换变量,多个以英文;间隔 |
@@ -1162,3 +1163,4 @@ String sign = AppRsaSignUtils.rsaSign("appId=" + APP_ID + "&cvSequence=" + CVSEQ
 | notice.template.not.exist | 应用通知模板不存在 |
 | notice.template.not.matches | 该应用通知模板不属于该应用 |
 | notice.template.replace.error | 模板变量替换错误，请检查可变参数数量 |
+| notice.sequenceNo.exist | 该应用通知已经推送，无需重复推送 |
