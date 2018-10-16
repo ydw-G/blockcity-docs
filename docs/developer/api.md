@@ -1059,7 +1059,7 @@ if (APP_ID.equals(object.getString("appId")) && PUSH_ITEM.equals(object.getStrin
 
 > 若返回内容不符合要求，则布洛克服务端会重试推送，直到应用方返回该内容为止。
 
-### 用户使用卡券通知
+### 用户使用卡券推送
 
 该请求的业务场景是当用户在应用方使用了该卡券的同时，需通知布洛克城该用户已使用该卡券。
 
@@ -1119,4 +1119,64 @@ String sign = AppRsaSignUtils.rsaSign("appId=" + APP_ID + "&cvSequence=" + CVSEQ
 | app.error.card.voucher.user.error | 用户不匹配 |
 
 
+## 通知API
+### 推送应用通知给指定用户(内测使用)
+开发者需提前向公信宝提出push申请，发送通知模板审核，审核通过之后公信宝将返回通知模板编码templateCode。可通过该接口push应用通知给用户。
 
+#### 请求地址
+|环境| HTTPS请求地址 |
+| :---    | :---   | 
+| 沙箱环境 | https://sandbox.blockcity.gxb.io/openapi/app/pushNotice |
+| 正式环境 | https://open.blockcity.gxb.io/api/app/pushNotice |
+
+请求方式
+> method: POST
+> Content-Type: application/x-www-form-urlencoded 
+
+#### 公共参数
+
+| 参数名称 | 参数类型 | 是否必须 | 参数描述 |
+| :---    | :---   | :---    | :---    |
+| client_id | string | 是 | appId |
+| method | string | 是 | 调用的接口 |
+| access_token | string | 是 | 用户访问令牌 |
+| timestamp | string | 是 | 时间戳，与服务器时间相差在5分钟以内才有效 |
+| sign | string | 是 | 接口签名，[签名算法](##签名算法) |
+
+#### 请求参数
+
+| 参数名称 | 参数类型 | 是否必须 | 参数描述 |
+| :---    | :---   | :---    | :---    |
+| templateCode | string | 是 | 应用通知模板 |
+| sequenceNo | string | 是 | 应用方消息唯一键(长度32个汉字以内) |
+| title | string | 否 | 通知标题替换变量,多个以英文;间隔(标题长度10个汉字以内) |
+| content | string | 否 | 通知内容替换变量,多个以英文;间隔(通知内容40个汉字以内) |
+| url | string | 否 | 链接地址替换变量,多个以英文;间隔 |
+
+>>  目前应用通知模板需人工向公信宝提交审核，审核通过之后将会反馈应用方templateCode。模板支持变量，但非必须。模板示例json："{
+	"title":"中奖啦，{0},{1}",
+	"content":"您在xx中了一等奖，价值{0},{1}",
+	"url":"http://xxxxx/{0}/{1}"
+}"
+
+```
+返回：
+{
+		"code":"0"
+        "data":null,
+        "msg":null
+}
+
+```
+
+#### 业务错误码
+|code| 描述 |
+| :---    | :---   | 
+| param.appid.invalid | 无效的app_id |
+| param.invalid | 非法参数(参数为空情况) |
+| notice.title.too.long | 该应用通知标题过长 |
+| notice.content.too.long | 该应用通知内容过长 |
+| notice.template.not.exist | 应用通知模板不存在 |
+| notice.template.not.matches | 该应用通知模板不属于该应用 |
+| notice.template.replace.error | 模板变量替换错误，请检查可变参数数量 |
+| notice.sequenceNo.exist | 该应用通知已经推送，无需重复推送 |
