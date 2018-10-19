@@ -348,7 +348,7 @@ private function sign($data)
 
 | 环境 | HTTPS请求地址 |
 | :--- | :--- |
-| 沙箱环境 | [https://sandbox.blockcity.gxb.io/api/blockpay/api/gateway](http://sandbox.blockcity.gxb.io/api/blockpay/api/gateway) |
+| 沙箱环境 | [https://sandbox.blockcity.gxb.io/api/blockpay/api/gateway](https://sandbox.blockcity.gxb.io/api/blockpay/api/gateway) |
 | 正式环境 | [https://blockcity.gxb.io/api/blockpay/api/gateway](https://blockcity.gxb.io/api/blockpay/api/gateway) |
 
 #### 请求方式
@@ -447,7 +447,7 @@ private function sign($data)
 
 | 环境 | HTTPS请求地址 |
 | :--- | :--- |
-| 沙箱环境 | [https://sandbox.blockcity.gxb.io/api/blockpay/api/gateway](http://sandbox.blockcity.gxb.io/api/blockpay/api/gateway) |
+| 沙箱环境 | [https://sandbox.blockcity.gxb.io/api/blockpay/api/gateway](https://sandbox.blockcity.gxb.io/api/blockpay/api/gateway) |
 | 正式环境 | [https://blockcity.gxb.io/api/blockpay/api/gateway](https://blockcity.gxb.io/api/blockpay/api/gateway) |
 
 #### 请求方式
@@ -478,6 +478,7 @@ private function sign($data)
 | remark | string | 否 | 256 | 备注 |
 | pswd | string | 是 | - | 商户绑定布洛克城账号(需到布洛克城app设置)的交易密码，沙箱和正式密码不一样。加密方式：md5\(md5\(密码\)+timestamp\) |
 | outTransferNo | string | 是 | 32 | 商户外部转账no，请传唯一id，一个外部转账no只能转账一次 |
+| subject | string | 否 | 256 | 自定义标题，不传标题默认转账 |
 
 #### 公共响应参数
 
@@ -541,7 +542,7 @@ private function sign($data)
 
 | 环境 | HTTPS请求地址 |
 | :--- | :--- |
-| 沙箱环境 | [https://sandbox.blockcity.gxb.io/api/blockpay/api/gateway](http://sandbox.blockcity.gxb.io/api/blockpay/api/gateway) |
+| 沙箱环境 | [https://sandbox.blockcity.gxb.io/api/blockpay/api/gateway](https://sandbox.blockcity.gxb.io/api/blockpay/api/gateway) |
 | 正式环境 | [https://blockcity.gxb.io/api/blockpay/api/gateway](https://blockcity.gxb.io/api/blockpay/api/gateway) |
 
 #### 请求方式
@@ -639,6 +640,111 @@ private function sign($data)
 }
 ```
 
+### 查询转账记录
+
+查询转账记录，对应的method请求参数为：blockpay.trade.transfer.detail
+
+#### 请求地址
+
+| 环境 | HTTPS请求地址 |
+| :--- | :--- |
+| 沙箱环境 | [https://sandbox.blockcity.gxb.io/api/blockpay/api/gateway](https://sandbox.blockcity.gxb.io/api/blockpay/api/gateway) |
+| 正式环境 | [https://blockcity.gxb.io/api/blockpay/api/gateway](https://blockcity.gxb.io/api/blockpay/api/gateway) |
+
+#### 请求方式
+
+> <font size="2">method: POST</font>
+>
+> <font size="2">Content-Type: application/json</font>
+
+#### 公共请求参数
+
+| 参数名称 | 参数类型 | 是否必须 | 最大长度 | 参数描述 |
+| :--- | :--- | :--- | :---| :--- |
+| app\_id | string | 是 | 16 | 商户的appid |
+| method | string | 是 | - | 调用的接口,blockpay.trade.transfer.detail |
+| timestamp | long | 是 | - | 13位时间戳（精确到毫秒） |
+| version | string | 是 | - | 调用的接口版本，固定为：1.0 |
+| notify\_url | string | 否 | 256 | 支付回调地址 |
+| biz\_content | string | 是 | - | 业务请求参数的集合 ，json格式 |
+| sign | string | 是 | - | 接口签名，[签名算法](#支付签名) |
+
+#### 请求参数
+
+| 参数 | 类型 | 是否必须 | 最大长度 | 描述 |
+| :--- | :--- | :--- | :---| :--- |
+| out\_transfer\_no | string | 可选 | 32 | 商户外部转账no，请传唯一id，一个外部转账no只能转账一次 |
+| transfer\_no | string | 可选 | 32 | 转账订单号 |
+
+#### 公共响应参数
+
+| 参数 | 类型 | 是否必填 | 描述 | 示例值 |
+| :--- | :--- | :--- | :--- | :--- |
+| success | boolean | 是 | 响应结果 | true |
+| errorCode | String | 否 | [错误码](#错误码：) | pay.method.no-exist |
+| errorMsg | String | 否 | 错误说明 | 接口不存在 |
+| data | object | 否 | 返回的数据内容 | {} |
+
+#### 错误码：
+
+| 错误码 | 描述 |
+| :--- | :--- |
+| pay.method.no-exist | 接口不存在 |
+| pay.remote.service.error | 服务异常 |
+| pay.appid.not.exist | appid不存在 |
+| pay.param.sign.error | 签名错误 |
+| pay.param.currency.not\_support | 不支持的币种 |
+| pay.param.notify\_url.empty | 回调地址不能为空 |
+| pay.param.invalid | 参数不合法 |
+
+#### 响应参数
+
+| 参数 | 类型 | 是否必须 | 最大长度 | 描述 |
+| :--- | :--- | :--- | :--- | :--- |
+| transfer\_no | string | 是 | 32 | 转账订单号 |
+| out\_transfer\_no | string | 是 | 32 | 商户外部转账no，请传唯一id，一个外部转账no只能转账一次 |
+| to\_user | string | 是 | 32 | 转入方uuid |
+| amount | double | 是 | - | 转账金额 |
+| currency | string | 是 | 32 | 币种 |
+| remark | string | 否 | 256 | 备注 |
+| subject | string | 否 | 256 | 转账标题 |
+| transfer\_date | date | 是 | - | 转账时间 |
+| status | string | 是 | - | 状态，WAIT_TRANSFER  待转账，TRANSFER_SUCCESS  转账成功，TRANSFER_FAILED 转账失败 |
+
+
+#### 请求示例
+
+#### 响应示例
+
+``` json
+{
+    "success":true,
+    "data":{
+        "transfer_no":"",
+        "out_transfer_no":"",
+        "status":"",
+        "amount":10,
+        "currency":"GXS",
+        "remark":"",
+        "subject":"布洛克城转账",
+        "transfer_date":1534559335937,
+        "to_user":"eccbc87e4b5ce2fe28308fd9f2a7bh29",
+    }
+}
+```
+
+#### 异常示例
+
+``` json
+{
+    "success":false,
+    "errorCode":"pay.remote.service.error",
+    "errorMsg":"服务错误"
+}
+```
+
+
+
 ### 退款接口
 
 发起交易退款接口，对应的method请求参数为：blockpay.trade.refund
@@ -647,7 +753,7 @@ private function sign($data)
 
 | 环境 | HTTPS请求地址 |
 | :--- | :--- |
-| 沙箱环境 | [https://sandbox.blockcity.gxb.io/api/blockpay/api/gateway](http://sandbox.blockcity.gxb.io/api/blockpay/api/gateway) |
+| 沙箱环境 | [https://sandbox.blockcity.gxb.io/api/blockpay/api/gateway](https://sandbox.blockcity.gxb.io/api/blockpay/api/gateway) |
 | 正式环境 | [https://blockcity.gxb.io/api/blockpay/api/gateway](https://blockcity.gxb.io/api/blockpay/api/gateway) |
 
 #### 请求方式
@@ -834,7 +940,7 @@ private function sign($data)
 
 | 环境 | HTTPS请求地址 |
 | :--- | :--- |
-| 沙箱环境 | [https://sandbox.blockcity.gxb.io/api/blockpay/api/gateway](http://sandbox.blockcity.gxb.io/api/blockpay/api/gateway) |
+| 沙箱环境 | [https://sandbox.blockcity.gxb.io/api/blockpay/api/gateway](https://sandbox.blockcity.gxb.io/api/blockpay/api/gateway) |
 | 正式环境 | [https://blockcity.gxb.io/api/blockpay/api/gateway](https://blockcity.gxb.io/api/blockpay/api/gateway) |
 
 #### 请求方式
@@ -914,7 +1020,7 @@ private function sign($data)
 
 | 环境 | HTTPS请求地址 |
 | :--- | :--- |
-| 沙箱环境 | [https://sandbox.blockcity.gxb.io/api/blockpay/api/gateway](http://sandbox.blockcity.gxb.io/api/blockpay/api/gateway) |
+| 沙箱环境 | [https://sandbox.blockcity.gxb.io/api/blockpay/api/gateway](https://sandbox.blockcity.gxb.io/api/blockpay/api/gateway) |
 | 正式环境 | [https://blockcity.gxb.io/api/blockpay/api/gateway](https://blockcity.gxb.io/api/blockpay/api/gateway) |
 
 #### 请求方式
@@ -979,6 +1085,86 @@ private function sign($data)
     "errorMsg":"服务错误"
 }
 ```
+
+
+### 支持支付币种
+
+拉取支持的所有支付币种接口，对应的method请求参数为：blockpay.currency.list
+
+#### 请求地址
+
+| 环境 | HTTPS请求地址 |
+| :--- | :--- |
+| 沙箱环境 | [https://sandbox.blockcity.gxb.io/api/blockpay/api/gateway](https://sandbox.blockcity.gxb.io/api/blockpay/api/gateway) |
+| 正式环境 | [https://blockcity.gxb.io/api/blockpay/api/gateway](https://blockcity.gxb.io/api/blockpay/api/gateway) |
+
+#### 请求方式
+
+> <font size="2">method: POST</font>
+>
+> <font size="2">Content-Type: application/json</font>
+
+#### 公共请求参数
+
+| 参数名称 | 参数类型 | 是否必须 | 最大长度 | 参数描述 |
+| :--- | :--- | :--- | :--- | :--- |
+| app\_id | string | 是 | 16 | 商户的appid |
+| method | string | 是 | - | 调用的接口，blockpay.assets.balance |
+| timestamp | long | 是 | - | 13位时间戳（精确到毫秒） |
+| version | string | 是 | - | 调用的接口版本，固定为：1.0 |
+| notify\_url | string | 否 | 256 | 支付回调地址
+| biz\_content | string | 是 | - | 业务请求参数的集合 ，json格式 |
+| sign | string | 是 | - | 接口签名，[签名算法](#支付签名) |
+#### 请求参数
+
+#### 公共响应参数
+
+| 参数 | 类型 | 是否必填 | 描述 | 示例值 |
+| :--- | :--- | :--- | :--- | :--- |
+| success | boolean | 是 | 响应结果 | true |
+| errorCode | String | 否 | [错误码](#错误码：) | pay.method.no-exist |
+| errorMsg | String | 否 | 错误说明 | 接口不存在 |
+| data | object | 否 | 返回的数据内容 | {} |
+
+#### 错误码：
+
+| 错误码 | 描述 |
+| :--- | :--- |
+| pay.method.no-exist | 接口不存在 |
+| pay.remote.service.error | 服务异常 |
+| pay.appid.not.exist | appid不存在 |
+| pay.param.sign.error | 签名错误 |
+| pay.param.currency.not\_support | 不支持的币种 |
+| pay.param.notify\_url.empty | 回调地址不能为空 |
+| pay.param.invalid | 参数不合法 |
+
+#### 响应参数
+| 参数 | 类型 | 是否必须 | 最大长度 | 描述 |
+| :--- | :--- | :--- | :--- | :--- |
+| currency | string | 是 | 32 | 币种 |
+| balance | double | 是 | - | 余额 |
+
+#### 请求示例
+
+#### 响应示例
+
+``` json
+{
+    "success":true,
+    "data":[{"currency":"GXS","balance":100}]
+}
+```
+
+#### 异常示例
+
+``` json
+{
+    "success":false,
+    "errorCode":"pay.remote.service.error",
+    "errorMsg":"服务错误"
+}
+```
+
 
 ## 卡券
 
