@@ -1087,9 +1087,9 @@ private function sign($data)
 ```
 
 
-### 支持支付币种
+### 账户余额接口
 
-拉取支持的所有支付币种接口，对应的method请求参数为：blockpay.currency.list
+查询当前商户账户可用余额接口，对应的method请求参数为：blockpay.assets.balance
 
 #### 请求地址
 
