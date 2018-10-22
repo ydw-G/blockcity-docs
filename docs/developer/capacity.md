@@ -400,12 +400,12 @@ import BlockCity from 'blockcity-js-sdk';
 为开发者提供旋转屏幕显示方向的能力。
 
 ``` javascript
-BlockCity.rotate();
+BlockCity.closeWindow();
 ```
 
 > <font size="2">小应用需要先引入Blockcity JS-SDK</font>
 
-## 小应用关闭
+## 旋转屏幕
 
 ### 功能介绍
 
