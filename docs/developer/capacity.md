@@ -175,7 +175,7 @@ Cx8PD3e6Bgw/IjDBIgfOXp1wygTzfFLWu+l2jXs1JBV6jvekCjT7luZQrB9hSTgg
 26SxWtro3hLHvuyTmsu+ihmbotWw64bBI9dmklGziHJXThNr+pyjzKgSz4fzMdyl
 uATOTMpL2j0U6sFlI1hfhvNMKuHOaIYniP4zFEPs/5tw5fZrHMVnGn6V8LFj5kDP
 BQIDAQAB
-``` 
+```
 
 #### 2.1.3 引入Blockcity JS-SDK
 
@@ -397,10 +397,61 @@ import BlockCity from 'blockcity-js-sdk';
 
 #### 2.2 功能接入
 
-给开发者能力直接退出当前的WebView。
+为开发者提供旋转屏幕显示方向的能力。
 
 ``` javascript
 BlockCity.closeWindow();
+```
+
+> <font size="2">小应用需要先引入Blockcity JS-SDK</font>
+
+## 旋转屏幕
+
+### 功能介绍
+
+为开发者提供旋转屏幕显示方向的能力。
+
+#### 1.1 功能流程
+
+引入JS-SDK，直接调用即可
+
+#### 1.2 准入条件
+
+无
+
+### 接入指引
+
+#### 2.1 开发准备
+
+#### CDN引入
+
+通过 [unpkg.com/blockcity-js-sdk](https://unpkg.com/blockcity-js-sdk/) 可以看到 Blockcity JS-SDK 最新版本的资源，也可以切换版本选择需要的资源，在页面上引入 js 文件即可开始使用：
+
+``` javascript
+<script src="//unpkg.com/blockcity-js-sdk/dist/blockcity-js-sdk.min.js"></script>
+```
+
+#### NPM安装
+
+推荐使用 npm 来安装，享受生态圈和工具带来的便利，更好地和 webpack 配合使用。
+
+``` bash
+npm install blockcity-js-sdk -save
+```
+
+npm使用
+
+``` javascript
+import BlockCity from 'blockcity-js-sdk';
+```
+
+
+#### 2.2 功能接入
+
+为开发者提供旋转屏幕显示方向的能力。
+
+``` javascript
+BlockCity.rotate();
 ```
 
 > <font size="2">小应用需要先引入Blockcity JS-SDK</font>
