@@ -321,6 +321,93 @@ System.out.println(JSON.toJSONString(param));
 | default.error | 服务异常 |
 
 
+### 用户健康数据
+
+开发者可通过此接口获取用户最新3天内健康数据。
+
+#### 请求地址
+
+| 环境 | HTTPS请求地址 |
+| :--- | :--- |
+| 沙箱环境 | [https://sandbox.blockcity.gxb.io/openapi/user/steps](https://sandbox.blockcity.gxb.io/openapi/user/steps) |
+| 正式环境 | [https://open.blockcity.gxb.io/api/user/steps](https://open.blockcity.gxb.io/api/user/steps) |
+
+#### 公共请求参数
+
+| 参数名称 | 参数类型 | 是否必须 | 最大长度 | 参数描述 |
+| :--- | :--- | :--- | :--- | :--- |
+| client\_id | string | 是 | 16 | appId |
+| method | string | 是 | - | 调用的接口，user.steps |
+| access\_token | string | 是 | 32 | 用户访问令牌 |
+| timestamp | string | 是 | - | 13位时间戳（精确到毫秒），与服务器时间相差在5分钟以内才有效 |
+| sign | string | 是 | - | 接口签名，[令牌签名算法](api.html#令牌签名) |
+
+#### 公共响应参数
+
+| 参数 | 类型 | 是否必填 | 最大长度 | 描述 | 示例值 |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| code | String | 是 | - | 网关返回码,[详见文档](api.html#业务错误码) | 0 |
+| msg | String | 否 | - | 网关返回错误描述 | 系统内部错误 |
+| data | object | 否 | - | 返回的数据内容 | {} |
+
+#### 响应参数
+
+| 参数名称 | 参数类型 | 最大长度 | 参数描述 |
+| :--- | :--- | :--- | :--- |
+| date | string | 10 | 日期(格式为:"yyyy-mm-dd") |
+| steps | int | 11 | 步数 |
+
+#### 请求示例
+
+* 组装HTTP请求 将所有参数名和参数值采用utf-8进行URL编码，然后通过GET或POST发起请求，如：
+
+  > <font size="2">正式环境 ：[https://open.blockcity.gxb.io/api/user/steps?client\_id=2wE3tlWcRdVRaHhi&method=user.baseinfo&access\_token=d12fd13rf3f&timestamp=1524658239010&sign=3d73f456febfa81a97f626c56d7a6419](https://open.blockcity.gxb.io/api/user/baseinfo?client_id=2wE3tlWcRdVRaHhi&method=user.baseinfo&access_token=d12fd13rf3f&timestamp=1524658239010&sign=3d73f456febfa81a97f626c56d7a6419)</font>
+  >
+  > <font size="2">沙箱环境 ： [https://sandbox.blockcity.gxb.io/openapi/user/steps?client\_id=2wE3tlWcRdVRaHhi&method=user.baseinfo&access\_token=d12fd13rf3f&timestamp=1524658239010&sign=3d73f456febfa81a97f626c56d7a6419](http://sandbox.blockcity.gxb.io/openapi/user/baseinfo?client_id=2wE3tlWcRdVRaHhi&method=user.baseinfo&access_token=d12fd13rf3f&timestamp=1524658239010&sign=3d73f456febfa81a97f626c56d7a6419)</font>
+
+#### 响应示例
+
+``` json
+{
+    "code": "0",
+    "data": [
+        {
+            "date": "2018-10-28",
+            "steps": 3667
+        },
+        {
+            "date": "2018-10-29",
+            "steps": 7080
+        },
+        {
+            "date": "2018-10-30",
+            "steps": 2143
+        }
+    ]
+}
+```
+
+#### 异常示例
+
+``` json
+{
+    "code": "0",
+    "msg": "错误信息提示",
+    "data": {}
+}
+```
+
+#### 业务错误码
+
+| code | 描述 |
+| :--- | :--- |
+| 0 | 表示接口成功 |
+| param.sign.invalid | 签名错误 |
+| param.timestamp.invalid | 时间戳无效 |
+| param.appid.invalid | app\_id无效 |
+| param.invalid | 非法参数 |
+| default.error | 服务异常 |
+
 ## 支付API
 
 ### 预创建支付
@@ -1125,7 +1212,7 @@ String sign = AppRsaSignUtils.rsaSign("appId=" + APP_ID + "&cvSequence=" + CVSEQ
 | method | string | 是 | 调用的接口 |
 | access_token | string | 是 | 用户访问令牌 |
 | timestamp | string | 是 | 时间戳，与服务器时间相差在5分钟以内才有效 |
-| sign | string | 是 | 接口签名，[签名算法](##签名算法) |
+| sign | string | 是 | 接口签名，[签名算法](api.html#令牌签名) |
 
 #### 请求参数
 
