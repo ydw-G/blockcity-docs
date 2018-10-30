@@ -375,7 +375,7 @@ private function sign($data)
 | :--- | :--- | :--- | :--- | :--- |
 | subject | string | 是 | 256 | 商品的标题 |
 | out\_trade\_no | string | 是 | 32 | 商户唯一订单号 |
-| pay\_expire | string | 否 | - | 该笔订单允许的最晚付款时间，逾期将关闭交易，默认30m。取值范围：1m～1d，m-分钟，h-小时，d-天 |
+| pay\_expire | string | 否 | - | 该笔订单允许的最晚付款时间，逾期将关闭交易，默认30m。取值范围：30m～1d，m-分钟，h-小时，d-天 |
 | total\_amount | double | 是 | - | 订单总金额，单位为元，精确到小数点后五位，取值范围\[0.00001,100000000\] |
 | seller\_id | string | 否 | 32 | 收款方的用户uuid，不传代表应用对应商户 |
 | currency | string | 是 | 32 | 支付币种，例：GXS |
