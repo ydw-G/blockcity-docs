@@ -1453,3 +1453,72 @@ String sign = AppRsaSignUtils.rsaSign("appId=" + APP_ID + "&cvSequence=" + CVSEQ
 | notice.template.not.matches | 该应用通知模板不属于该应用 |
 | notice.template.replace.error | 模板变量替换错误，请检查可变参数数量 |
 | notice.sequenceNo.exist | 该应用通知已经推送，无需重复推送 |
+
+
+## 布洛克口令API
+### 创建口令
+开发者创建布洛克城口令后，用户复制口令打开布洛克城，将会有弹窗引导用户跳转到口令指定链接地址。
+
+#### 请求地址
+|环境| HTTPS请求地址 |
+| :---    | :---   | 
+| 沙箱环境 | https://sandbox.blockcity.gxb.io/openapi/blockCode/init |
+| 正式环境 | https://open.blockcity.gxb.io/api/blockCode/init |
+
+请求方式
+> method: POST
+> Content-Type: multipart/form-data 
+
+#### 公共参数
+
+| 参数名称 | 参数类型 | 是否必须 | 参数描述 |
+| :---    | :---   | :---    | :---    |
+| client_id | string | 否 | appId，布洛克城应用方需要传appId有助于辅助统计转化情况 |
+
+#### 请求参数
+
+| 参数名称 | 参数类型 | 是否必须 | 参数描述 |
+| :---    | :---   | :---    | :---    |
+| codeType | int | 是 | 口令类型：1.其他；2.小应用；3.智能合约； |
+| expiresDate | string | 是 | 口令过期时间，不能早于当前时间，格式：yyyy-MM-dd HH:mm:ss |
+| title | string | 是 | 口令默认标题 |
+| content | string | 是 | 口令默认内容 |
+| url | string | 是 | 口令跳转链接 |
+| file | file | 否 | 口令图标，不传会有默认图标 |
+ 
+
+```
+返回：
+{
+  "code": "0",
+  "msg": null,
+  "data": {
+    "blockCode": "Vnd5M7hUz3q"
+  }
+}
+
+```
+
+####布洛克城口令识别模版：
+第三方可以根据模版格式对不同用户群体推送定制化的内容，用户复制内容不完整时会使用创建口令时提供的默认title及content填充正文和标题。
+ 
+>【游戏功能全新上线，前1000位用户可获得神秘礼包！】长按复制这段文字后，打开布洛克城APP，可进入「布洛克城游戏频道」 ¥wehHK45hkoa¥ 
+
+【自定义正文】：【】中为自定义内容，该内容即口令弹框的“正文”。
+
+「自定义标题」：「」中为自定义内容，即打开的对应功能模块。 
+
+¥wehHK45hk¥ ：布洛克口令，解析为跳转链接，图标，默认标题及默认正文。
+
+
+
+#### 业务错误码
+|code| 描述 |
+| :---    | :---   | 
+| param.appid.invalid | 无效的app_id |
+| param.invalid | 非法参数(参数为空情况) |
+| blockcode.url.empty.error | 布洛克口令跳转链接不能为空 |
+| blockcode.title.too.long | 布洛克口令标题过长 |
+| blockcode.content.too.long | 布洛克口令内容过长 |
+| blockcode.expire.date.error | 布洛克口令过期时间异常 |
+
