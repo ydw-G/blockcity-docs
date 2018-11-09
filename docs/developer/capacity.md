@@ -227,7 +227,7 @@ import BlockCity from 'blockcity-js-sdk';
 
 ``` javascript
 BlockCity.choosePay({
-    tradeNo: ''
+    tradeNo: '',
     success: function() {
         console.log('支付成功');
     },
