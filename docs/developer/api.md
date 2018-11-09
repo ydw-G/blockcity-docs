@@ -1517,6 +1517,9 @@ String sign = AppRsaSignUtils.rsaSign("appId=" + APP_ID + "&cvSequence=" + CVSEQ
 | :---    | :---   | 
 | param.appid.invalid | 无效的app_id |
 | param.invalid | 非法参数(参数为空情况) |
+| blockcode.title.empty.error | 布洛克口令标题不能为空 |
+| blockcode.content.empty.error | 布洛克口令内容不能为空 |
+| blockcode.expire.date.empty.error | 布洛克口令过期时间不能为空 |
 | blockcode.url.empty.error | 布洛克口令跳转链接不能为空 |
 | blockcode.title.too.long | 布洛克口令标题过长 |
 | blockcode.content.too.long | 布洛克口令内容过长 |
