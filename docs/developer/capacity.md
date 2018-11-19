@@ -397,61 +397,10 @@ import BlockCity from 'blockcity-js-sdk';
 
 #### 2.2 功能接入
 
-为开发者提供旋转屏幕显示方向的能力。
+为开发者提供一键关闭本小应用的能力。
 
 ``` javascript
 BlockCity.closeWindow();
-```
-
-> <font size="2">小应用需要先引入Blockcity JS-SDK</font>
-
-## 旋转屏幕
-
-### 功能介绍
-
-为开发者提供旋转屏幕显示方向的能力。
-
-#### 1.1 功能流程
-
-引入JS-SDK，直接调用即可
-
-#### 1.2 准入条件
-
-无
-
-### 接入指引
-
-#### 2.1 开发准备
-
-#### CDN引入
-
-通过 [unpkg.com/blockcity-js-sdk](https://unpkg.com/blockcity-js-sdk/) 可以看到 Blockcity JS-SDK 最新版本的资源，也可以切换版本选择需要的资源，在页面上引入 js 文件即可开始使用：
-
-``` javascript
-<script src="//unpkg.com/blockcity-js-sdk/dist/blockcity-js-sdk.min.js"></script>
-```
-
-#### NPM安装
-
-推荐使用 npm 来安装，享受生态圈和工具带来的便利，更好地和 webpack 配合使用。
-
-``` bash
-npm install blockcity-js-sdk -save
-```
-
-npm使用
-
-``` javascript
-import BlockCity from 'blockcity-js-sdk';
-```
-
-
-#### 2.2 功能接入
-
-为开发者提供旋转屏幕显示方向的能力。
-
-``` javascript
-BlockCity.rotate();
 ```
 
 > <font size="2">小应用需要先引入Blockcity JS-SDK</font>
@@ -548,10 +497,9 @@ npm使用
 import BlockCity from 'blockcity-js-sdk';
 ```
 
-
 #### 2.2 功能接入
 
-配置分享标题、描述、缩略图、URL。
+配置分享标题、描述、缩略图、URL，参数必填不能为空。
 
 ``` javascript
 BlockCity.shareConfig({
@@ -566,6 +514,266 @@ BlockCity.shareConfig({
         console.log('配置失败：' + JSON.stringify(error));
     }
 })
+```
+
+> <font size="2">小应用需要先引入Blockcity JS-SDK</font>
+
+## 旋转屏幕
+
+### 功能介绍
+
+为开发者提供旋转屏幕显示方向的能力。
+
+#### 1.1 功能流程
+
+引入JS-SDK，直接调用即可
+
+#### 1.2 准入条件
+
+无
+
+#### 1.3 版本支持
+
+Blockcity JS-SDK Version >= 1.1.6
+
+布洛克城沙箱 Version >= 2.0.3
+
+布洛克城 Version >= 2.0.3（即将上线）
+
+布洛克城国际版 Version >= 2.0.0（即将上线）
+
+### 接入指引
+
+#### 2.1 开发准备
+
+#### CDN引入
+
+通过 [unpkg.com/blockcity-js-sdk](https://unpkg.com/blockcity-js-sdk/) 可以看到 Blockcity JS-SDK 最新版本的资源，也可以切换版本选择需要的资源，在页面上引入 js 文件即可开始使用：
+
+``` javascript
+<script src="//unpkg.com/blockcity-js-sdk/dist/blockcity-js-sdk.min.js"></script>
+```
+
+#### NPM安装
+
+推荐使用 npm 来安装，享受生态圈和工具带来的便利，更好地和 webpack 配合使用。
+
+``` bash
+npm install blockcity-js-sdk -save
+```
+
+npm使用
+
+``` javascript
+import BlockCity from 'blockcity-js-sdk';
+```
+
+#### 2.2 功能接入
+
+为开发者提供旋转屏幕显示方向的能力。
+
+``` javascript
+BlockCity.rotate({
+    hiddenNav: 1, // hiddenNav(隐藏导航栏): 1代表隐藏导航栏，0不隐藏导航栏;
+    direction: 0  // direction(旋转方向): 0代表横屏，1代表竖屏
+});
+```
+
+> <font size="2">小应用需要先引入Blockcity JS-SDK</font>
+
+## 获取设备信息
+
+### 功能介绍
+
+为开发者提供获取设备信息的能力。
+
+#### 1.1 功能流程
+
+引入JS-SDK，直接调用即可
+
+#### 1.2 准入条件
+
+无
+
+#### 1.3 版本支持
+
+Blockcity JS-SDK Version >= 1.1.6
+
+布洛克城沙箱 Version >= 2.0.3
+
+布洛克城 Version >= 2.0.3（即将上线）
+
+布洛克城国际版 Version >= 2.0.0（即将上线）
+
+### 接入指引
+
+#### 2.1 开发准备
+
+#### CDN引入
+
+通过 [unpkg.com/blockcity-js-sdk](https://unpkg.com/blockcity-js-sdk/) 可以看到 Blockcity JS-SDK 最新版本的资源，也可以切换版本选择需要的资源，在页面上引入 js 文件即可开始使用：
+
+``` javascript
+<script src="//unpkg.com/blockcity-js-sdk/dist/blockcity-js-sdk.min.js"></script>
+```
+
+#### NPM安装
+
+推荐使用 npm 来安装，享受生态圈和工具带来的便利，更好地和 webpack 配合使用。
+
+``` bash
+npm install blockcity-js-sdk -save
+```
+
+npm使用
+
+``` javascript
+import BlockCity from 'blockcity-js-sdk';
+```
+
+#### 2.2 功能接入
+
+为开发者提供获取设备信息的能力，其中appLanguage可供开发者判断用户当前使用的App语言。
+
+``` javascript
+BlockCity.getDeviceInfo(function (result) {
+    alert(result);
+});
+```
+
+> <font size="2">小应用需要先引入Blockcity JS-SDK</font>
+
+## 获取系统语言
+
+### 功能介绍
+
+为开发者提供获取手机系统语言的能力。
+
+#### 1.1 功能流程
+
+引入JS-SDK，直接调用即可
+
+#### 1.2 准入条件
+
+无
+
+#### 1.3 版本支持
+
+Blockcity JS-SDK Version >= 1.1.6
+
+布洛克城沙箱 Version >= 2.0.3
+
+布洛克城 Version >= 2.0.3（即将上线）
+
+布洛克城国际版 Version >= 2.0.0（即将上线）
+
+### 接入指引
+
+#### 2.1 开发准备
+
+#### CDN引入
+
+通过 [unpkg.com/blockcity-js-sdk](https://unpkg.com/blockcity-js-sdk/) 可以看到 Blockcity JS-SDK 最新版本的资源，也可以切换版本选择需要的资源，在页面上引入 js 文件即可开始使用：
+
+``` javascript
+<script src="//unpkg.com/blockcity-js-sdk/dist/blockcity-js-sdk.min.js"></script>
+```
+
+#### NPM安装
+
+推荐使用 npm 来安装，享受生态圈和工具带来的便利，更好地和 webpack 配合使用。
+
+``` bash
+npm install blockcity-js-sdk -save
+```
+
+npm使用
+
+``` javascript
+import BlockCity from 'blockcity-js-sdk';
+```
+
+#### 2.2 功能接入
+
+为开发者提供获取手机系统语言的能力。
+
+``` javascript
+BlockCity.getSysLanguage(function (result) {
+    alert(result);
+});
+```
+
+> <font size="2">小应用需要先引入Blockcity JS-SDK</font>
+
+## 分享到微信
+
+### 功能介绍
+
+为开发者提供分享文本、图片、网页到微信好友或朋友圈的能力。
+
+#### 1.1 功能流程
+
+引入JS-SDK，直接调用即可
+
+#### 1.2 准入条件
+
+无
+
+#### 1.3 版本支持
+
+Blockcity JS-SDK Version >= 1.1.6
+
+布洛克城沙箱 Version >= 2.0.3
+
+布洛克城 Version >= 2.0.3（即将上线）
+
+布洛克城国际版 Version >= 2.0.0（即将上线）
+
+### 接入指引
+
+#### 2.1 开发准备
+
+#### CDN引入
+
+通过 [unpkg.com/blockcity-js-sdk](https://unpkg.com/blockcity-js-sdk/) 可以看到 Blockcity JS-SDK 最新版本的资源，也可以切换版本选择需要的资源，在页面上引入 js 文件即可开始使用：
+
+``` javascript
+<script src="//unpkg.com/blockcity-js-sdk/dist/blockcity-js-sdk.min.js"></script>
+```
+
+#### NPM安装
+
+推荐使用 npm 来安装，享受生态圈和工具带来的便利，更好地和 webpack 配合使用。
+
+``` bash
+npm install blockcity-js-sdk -save
+```
+
+npm使用
+
+``` javascript
+import BlockCity from 'blockcity-js-sdk';
+```
+
+#### 2.2 功能接入
+
+为开发者提供分享文本、图片、网页到微信好友或朋友圈的能力，参数必填不能为空。
+
+``` javascript
+BlockCity.callShare({
+    contentType: 0,     // contentType: 0分享文字，1分享图片，2分享网页;
+    sceneType: 0,       // sceneType:0 代表分享到微信好友，1代表微信朋友圈;
+    title: '',          // 分享标题
+    shareDes: '',       // 分享描述
+    url: '',            // 分享URL
+    thumbUrl: '',       // 分享缩略图
+    success: function () {
+        alert('分享成功');
+    },
+    fail: function (error) {
+        alert('分享失败: ' + JSON.stringify(error));
+    }
+});
 ```
 
 > <font size="2">小应用需要先引入Blockcity JS-SDK</font>
