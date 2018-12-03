@@ -1465,7 +1465,7 @@ String sign = AppRsaSignUtils.rsaSign("appId=" + APP_ID + "&cvSequence=" + CVSEQ
 | 沙箱环境 | https://sandbox.blockcity.gxb.io/openapi/blockCode/init |
 | 正式环境 | https://open.blockcity.gxb.io/api/blockCode/init |
 
-请求方式
+#### 请求方式（接口不支持跨域）
 > method: POST
 > Content-Type: multipart/form-data 
 
